@@ -1,0 +1,67 @@
+@import '../../scss/functions';
+@import '../../scss/variables';
+
+.container {
+  display: grid;
+  grid-template-columns: rem(250) 1fr;
+  grid-template-areas:
+    'header header'
+    'aside main'
+    'aside footer';
+}
+
+header {
+  grid-area: header;
+  padding: var(--spacing-l);
+
+  height: rem(75);
+  background-color: #753a3a;
+}
+
+aside {
+  grid-area: aside;
+  padding: var(--spacing-lg);
+
+  background-color: #96da5e;
+}
+
+main {
+  grid-area: main;
+  padding: var(--spacing-xl);
+
+  background-color: #48a1b1;
+  min-height: 100vh;
+}
+
+footer {
+  grid-area: footer;
+  padding: var(--spacing-sm);
+
+  height: rem(50);
+  background-color: #551e9e;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    position: relative;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    grid-template-columns: 1fr;
+  }
+
+  aside {
+    position: absolute;
+    top: rem(50);
+    left: 0;
+
+    transform: translateX(rem(-250));
+    transition: all 1s;
+  }
+
+  .open-menu-ts {
+    transform: translateX(rem(0));
+    transition: all 1s;
+  }
+}

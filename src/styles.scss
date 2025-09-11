@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import './app/scss/variables';
+
+html {
+  font-size: $base-font-size;
+}
+
+:root {
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-xxl: #{$spacing-xxl};
+
+  --border-radius-sm: #{$spacing-sm};
+  --border-radius-md: #{$spacing-md};
+  --border-radius-lg: #{$spacing-lg};
+}
