@@ -1,0 +1,6 @@
+@import '../../../scss/mixins';
+@import '../../../scss/functions';
+
+.navigation {
+  @include flex($justify: start, $gap: rem(25));
+}
