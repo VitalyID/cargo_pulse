@@ -1,6 +1,10 @@
 @import '../../../scss/functions';
 @import '../../../scss/mixins';
 
+.header {
+  @include flex($justify: space-between);
+}
+
 picture {
   @include flex();
 }
