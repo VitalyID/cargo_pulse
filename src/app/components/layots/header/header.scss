@@ -2,7 +2,31 @@
 @import '../../../scss/mixins';
 
 .header {
-  @include flex($justify: space-between);
+  @include flex($justify: start);
+  height: rem(75);
+
+  &__left {
+    padding: 0 var(--spacing-lg);
+
+    app-svg-sprite {
+      display: none;
+      cursor: pointer;
+      --svgWidth: 40px;
+      --svgHeight: 40px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: auto;
+
+    app-svg-sprite {
+      display: block;
+    }
+
+    picture {
+      display: none;
+    }
+  }
 }
 
 picture {

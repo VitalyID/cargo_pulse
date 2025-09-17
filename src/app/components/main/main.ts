@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ToggleMenuService } from 'src/app/services/toggleMenu.service';
 
 @Component({
   selector: 'app-main',
@@ -6,4 +8,26 @@ import { Component } from '@angular/core';
   templateUrl: './main.html',
   styleUrl: './main.scss',
 })
-export class Main {}
+export class Main {
+  @HostListener('document:keyup', ['$event']) menuCloseToggler(event: KeyboardEvent) {
+    this.menuClose(event);
+    console.log(event);
+  }
+
+  readonly #menuService = inject(ToggleMenuService);
+
+  sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
+
+  menuClose(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.sideBarClose();
+    }
+  }
+  menuOff() {
+    this.sideBarClose();
+  }
+
+  sideBarClose() {
+    this.#menuService.sideBarClose();
+  }
+}

@@ -4,3 +4,9 @@
 .navigation {
   @include flex($justify: start, $gap: rem(25));
 }
+
+@media (max-width: 992px) {
+  .navigation:not(.open-menu-ts) span {
+    display: none;
+  }
+}

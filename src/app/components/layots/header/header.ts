@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ToggleMenuService } from './../../../services/toggleMenu.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Header {}
+export class Header {
+  readonly #menuService = inject(ToggleMenuService);
+
+  toggleMenu() {
+    this.#menuService.sideBarOpen();
+  }
+}

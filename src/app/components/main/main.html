@@ -2,7 +2,9 @@
   <header>
     <app-header></app-header>
   </header>
-  <aside>
+  <aside [class.open-menu-ts]="sideBarState$ | async">
+    @if(sideBarState$ | async){
+    <app-svg-sprite icon="icon-x-circle" class="icon-close" (click)="menuOff()"></app-svg-sprite>}
     <app-aside></app-aside>
   </aside>
   <main></main>

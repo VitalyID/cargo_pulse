@@ -16,6 +16,6 @@ html {
   --border-radius-md: #{$spacing-md};
   --border-radius-lg: #{$spacing-lg};
 
-  --svgWidth: 20px;
-  --svgHeight: 20px;
+  --asideWidth: #{rem(250)};
+  --asideWidth992: #{rem(200)};
 }

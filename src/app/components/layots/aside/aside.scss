@@ -1,11 +1,2 @@
 @import '../../../scss/functions';
 @import '../../../scss/mixins';
-
-picture {
-  @include flex();
-}
-
-img {
-  width: rem(75);
-  height: rem(75);
-}

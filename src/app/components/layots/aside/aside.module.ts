@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Aside } from './aside';
 import { Navigation } from 'src/app/shared/components/navigation/navigation';
+import { Aside } from './aside';
 
 @NgModule({
   imports: [Navigation],
