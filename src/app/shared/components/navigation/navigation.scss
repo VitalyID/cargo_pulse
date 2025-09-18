@@ -2,37 +2,54 @@
 @import '../../../scss/functions';
 
 .navigation {
-  @include flex($gap: rem(25));
+  @include flex();
   position: relative;
-  background-color: #326b66;
 
   &__icon {
     @include flex();
 
     padding: var(--spacing-lg);
-    width: 100%;
+    width: rem(25);
     position: relative;
-    z-index: 100;
+    z-index: 50;
+    background-color: #326b66;
   }
 
   &__title {
     @include flex($justify: start);
 
     padding: var(--spacing-lg);
-    position: absolute;
+    padding-left: 0;
     height: var(--spacing-lg);
-    left: calc(var(--spacing-lg) * 2);
     background-color: #326b66;
 
-    width: 120px;
+    width: 100%;
     z-index: 50;
-
-    transform: translateX(-100%);
-    transition: transform 1s;
   }
 
   &__title.open {
     transform: translateX(0%);
     transition: transform 1s;
+  }
+
+  & .icon-close {
+    position: absolute;
+    top: rem(5);
+    right: rem(5);
+    z-index: 100;
+  }
+
+  @media (max-width: 992px) {
+    &__icon {
+      z-index: 100;
+    }
+
+    &__title {
+      width: rem(135);
+      position: absolute;
+      left: calc(var(--spacing-lg) * 3);
+      transform: translateX(-100%);
+      transition: transform 1s;
+    }
   }
 }
