@@ -20,7 +20,7 @@ header {
 
 aside {
   grid-area: aside;
-  padding: var(--spacing-lg);
+  // padding-top: var(--spacing-lg);
 
   background-color: #96da5e;
   position: relative;
@@ -57,26 +57,27 @@ footer {
   }
 
   aside {
+    display: inline-block;
+
     position: absolute;
     top: rem(75);
     left: 0;
-    width: var(--asideWidth992);
 
-    transform: translateX(rem(-180));
-    transition: all 1s;
+    // transform: translateX(rem(-180));
+    // transition: all 1s;
   }
 
-  aside.open-menu-ts {
-    transform: translateX(rem(0));
-    transition: all 1s;
+  // aside.open-menu-ts {
+  //   transform: translateX(rem(0));
+  //   transition: all 1s;
 
-    .icon-close {
-      display: block;
-      position: absolute;
-      top: calc(var(--spacing-lg) / 2);
-      right: calc(var(--spacing-lg) / 2);
-      --svgWidth: 24px;
-      --svgHeight: 24px;
-    }
-  }
+  //   .icon-close {
+  //     display: block;
+  //     position: absolute;
+  //     top: calc(var(--spacing-lg) / 2);
+  //     right: calc(var(--spacing-lg) / 2);
+  //     --svgWidth: 24px;
+  //     --svgHeight: 24px;
+  //   }
+  // }
 }

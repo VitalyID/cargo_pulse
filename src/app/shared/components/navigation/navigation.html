@@ -1,4 +1,8 @@
 <div class="navigation">
-  <app-svg-sprite></app-svg-sprite>
-  <span>{{ title || 'No title' }}</span>
+  <div class="navigation__icon">
+    <app-svg-sprite></app-svg-sprite>
+  </div>
+  <div class="navigation__title" [class.open]="sideBarState$ | async">
+    <span>{{ title || 'No title' }}</span>
+  </div>
 </div>
