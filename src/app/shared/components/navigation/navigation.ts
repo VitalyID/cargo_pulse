@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { ToggleMenuService } from 'src/app/services/toggleMenu.service';
@@ -17,27 +17,28 @@ export class Navigation {
   @Input() title: string = '';
   @Input() icon: string = '';
   @Input() closeIcon: boolean = false;
+  @Input() isOpenMenu: boolean = false;
+  @Output() closeMenu = new EventEmitter<boolean>();
+  @Output() userOpenMenu = new EventEmitter<boolean>(false);
 
   readonly #menuService = inject(ToggleMenuService);
   readonly #viewPort = inject(ViewPortService);
-
-  isOpenMenu: boolean = false;
 
   viewPort = toSignal(this.#viewPort.isAdaptiveSize, { initialValue: { '992': false } });
 
   sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
 
   menuOff() {
-    console.log('close menu');
+    this.#menuService.sideBarClose();
+    this.closeMenu.emit(true);
   }
 
   openAsideSection() {
-    console.log('click on icon');
     this.#menuService.sideBarOpen();
 
     // attach userClickNavigation() to .navigation__icon after 1s
     setTimeout(() => {
-      this.isOpenMenu = true;
+      this.userOpenMenu.emit(true);
     }, 1000);
   }
 

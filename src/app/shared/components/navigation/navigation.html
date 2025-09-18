@@ -7,7 +7,7 @@
     (click)="viewPort()['992'] && !isOpenMenu && openAsideSection()"
     (click)="isOpenMenu && userClickNavigation()"
   >
-    <app-svg-sprite></app-svg-sprite>
+    <app-svg-sprite [icon]="icon"></app-svg-sprite>
   </div>
   <div
     class="navigation__title"
@@ -15,8 +15,9 @@
     (click)="userClickNavigation()"
   >
     <span>{{ title || 'No title' }}</span>
+
+    @if (closeIcon) {
+      <app-svg-sprite icon="icon-x-circle" class="icon-close" (click)="menuOff()"></app-svg-sprite>
+    }
   </div>
-  @if (closeIcon) {
-    <app-svg-sprite icon="icon-x-circle" class="icon-close" (click)="menuOff()"></app-svg-sprite>
-  }
 </div>

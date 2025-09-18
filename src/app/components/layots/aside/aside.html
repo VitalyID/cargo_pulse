@@ -1,1 +1,12 @@
-<app-navigation (click)="!viewPort()['992'] && userClickNavigation()"> </app-navigation>
+@for (section of asideList; track $index) {
+  <app-navigation
+    (click)="!viewPort()['992'] && userClickNavigation()"
+    [icon]="section.icon"
+    [title]="section.title"
+    [closeIcon]="$index === 0"
+    [isOpenMenu]="section.isOpenMenu || false"
+    (closeMenu)="closeMenu()"
+    (userOpenMenu)="userOpenMenu()"
+  >
+  </app-navigation>
+}
