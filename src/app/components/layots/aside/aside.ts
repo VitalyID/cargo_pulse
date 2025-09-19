@@ -1,7 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ViewPortService } from 'src/app/services/viewport.service';
-import { NavConfig } from 'src/types/enums/listMenuItems';
+import {
+  NAVIGATION_ICONS,
+  NAVIGATION_LABELS,
+  NavigationItems,
+} from 'src/types/enums/listMenuItems';
 import { NavigationConfig } from 'src/types/interfaces/navigationConf';
 
 @Component({
@@ -13,27 +17,32 @@ import { NavigationConfig } from 'src/types/interfaces/navigationConf';
 export class Aside {
   readonly #viewPort = inject(ViewPortService);
   viewPort = toSignal(this.#viewPort.isAdaptiveSize, { initialValue: { '992': false } });
-  asideList: NavigationConfig[] = this.mapEnumToAsideList();
+  navigationItems: NavigationConfig[] = this.createNavigationItems();
 
-  userClickNavigation() {
+  navigateToSection() {
     console.log('user navigation');
   }
 
-  mapEnumToAsideList(isOpenMenu: boolean = false) {
-    const listElementsNavigation = Object.entries(NavConfig);
-
-    const listNavSections: NavigationConfig[] = listElementsNavigation.map((item) => {
-      return { icon: item[1], title: item[0], isOpenMenu };
-    });
-
-    return listNavSections;
+  createNavigationItems(isOpenMenu: boolean = false) {
+    return Object.values(NavigationItems).map((itemKey: NavigationItems) => ({
+      icon: NAVIGATION_ICONS[itemKey],
+      title: NAVIGATION_LABELS[itemKey],
+      isOpenMenu,
+    }));
   }
 
   closeMenu() {
-    this.asideList = this.mapEnumToAsideList(false);
+    this.updateMenuState(false);
   }
 
   userOpenMenu() {
-    this.asideList = this.mapEnumToAsideList(true);
+    this.updateMenuState(true);
+  }
+
+  updateMenuState(newState: boolean) {
+    this.navigationItems = this.navigationItems.map((item) => ({
+      ...item,
+      isOpenMenu: newState,
+    }));
   }
 }

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
+import { MENU_ANIMATION_DELAY } from 'src/app/const';
 import { ToggleMenuService } from 'src/app/services/toggleMenu.service';
 import { ViewPortService } from 'src/app/services/viewport.service';
 import { SvgSprite } from '../svg-sprite/svg-sprite';
@@ -13,7 +14,7 @@ import { SvgSprite } from '../svg-sprite/svg-sprite';
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss',
 })
-export class Navigation {
+export class Navigation implements OnDestroy {
   @Input() title: string = '';
   @Input() icon: string = '';
   @Input() closeIcon: boolean = false;
@@ -27,6 +28,18 @@ export class Navigation {
   viewPort = toSignal(this.#viewPort.isAdaptiveSize, { initialValue: { '992': false } });
 
   sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
+  timeoutID: any;
+
+  iconClick() {
+    // NOTE: When viewPort <= 992px: click on icon is opening title in aside and after 1s attaching new method navigateToSection(). When viewPort > 992px: click on navigation component is start navigateToSection
+
+    if (this.viewPort()['992'] && !this.isOpenMenu) {
+      this.openAsideSection();
+    }
+    if (this.isOpenMenu) {
+      this.navigateToSection();
+    }
+  }
 
   menuOff() {
     this.#menuService.sideBarClose();
@@ -36,13 +49,19 @@ export class Navigation {
   openAsideSection() {
     this.#menuService.sideBarOpen();
 
-    // attach userClickNavigation() to .navigation__icon after 1s
-    setTimeout(() => {
+    // attach navigateToSection() to .navigation__icon after 1s
+    this.timeoutID = setTimeout(() => {
       this.userOpenMenu.emit(true);
-    }, 1000);
+    }, MENU_ANIMATION_DELAY);
   }
 
-  userClickNavigation() {
+  navigateToSection() {
     console.log('user navigation');
+  }
+
+  ngOnDestroy(): void {
+    if (this.timeoutID) {
+      clearTimeout(this.timeoutID);
+    }
   }
 }

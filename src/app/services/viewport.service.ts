@@ -1,6 +1,7 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, debounceTime, fromEvent, Subscription } from 'rxjs';
+import { typeDevice } from 'src/types/enums/listDevices';
 import { Breakpoints } from './../../types/interfaces/breakpoints';
 
 @Injectable({ providedIn: 'root' })

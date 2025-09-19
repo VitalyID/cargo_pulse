@@ -1,6 +1,6 @@
-@for (section of asideList; track $index) {
+@for (section of navigationItems; track $index) {
   <app-navigation
-    (click)="!viewPort()['992'] && userClickNavigation()"
+    (click)="!viewPort()['992'] && navigateToSection()"
     [icon]="section.icon"
     [title]="section.title"
     [closeIcon]="$index === 0"

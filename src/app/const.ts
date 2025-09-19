@@ -1,0 +1,1 @@
+export const MENU_ANIMATION_DELAY = 1000;

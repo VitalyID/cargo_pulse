@@ -1,22 +1,11 @@
 <div class="navigation">
-  <!-- When viewPort <= 992px: click on icon is opening title in aside and after 1s attaching new method userClickNavigation().
-   When viewPort > 992px: click on navigation component is start userClickNavigation()-->
-
-  <div
-    class="navigation__icon"
-    (click)="viewPort()['992'] && !isOpenMenu && openAsideSection()"
-    (click)="isOpenMenu && userClickNavigation()"
-  >
+  <div class="navigation__icon" (click)="iconClick()">
     <app-svg-sprite [icon]="icon"></app-svg-sprite>
   </div>
-  <div
-    class="navigation__title"
-    [class.open]="sideBarState$ | async"
-    (click)="userClickNavigation()"
-  >
+  <div class="navigation__title" [class.open]="sideBarState$ | async" (click)="navigateToSection()">
     <span>{{ title || 'No title' }}</span>
 
-    @if (closeIcon) {
+    @if (closeIcon && viewPort()['992']) {
       <app-svg-sprite icon="icon-x-circle" class="icon-close" (click)="menuOff()"></app-svg-sprite>
     }
   </div>
