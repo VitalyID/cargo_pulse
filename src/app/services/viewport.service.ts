@@ -20,9 +20,7 @@ export class ViewPortService {
     this.resizeSubscription = fromEvent(window, 'resize')
       .pipe(debounceTime(300), takeUntilDestroyed(this.#destroyRef))
       .subscribe(() => {
-        const updatedBreakpoints = this.updateBreakpoints();
-        console.log(updatedBreakpoints);
-        this.isAdaptiveSize.next(updatedBreakpoints);
+        this.isAdaptiveSize.next(this.updateBreakpoints());
       });
   }
 
