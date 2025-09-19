@@ -5,7 +5,7 @@
   <div class="navigation__title" [class.open]="sideBarState$ | async" (click)="navigateToSection()">
     <span>{{ title || 'No title' }}</span>
 
-    @if (closeIcon && viewPort()['992']) {
+    @if (closeIcon && viewPort()?.TABLET) {
       <app-svg-sprite icon="icon-x-circle" class="icon-close" (click)="menuOff()"></app-svg-sprite>
     }
   </div>
