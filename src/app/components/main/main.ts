@@ -11,7 +11,6 @@ import { ToggleMenuService } from 'src/app/services/toggleMenu.service';
 export class Main {
   @HostListener('document:keyup', ['$event']) menuCloseToggler(event: KeyboardEvent) {
     this.menuClose(event);
-    console.log(event);
   }
 
   readonly #menuService = inject(ToggleMenuService);

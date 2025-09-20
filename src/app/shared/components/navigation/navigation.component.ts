@@ -11,8 +11,8 @@ import { SvgSprite } from '../svg-sprite/svg-sprite';
   selector: 'app-navigation',
   standalone: true,
   imports: [SvgSprite, CommonModule],
-  templateUrl: './navigation.html',
-  styleUrl: './navigation.scss',
+  templateUrl: './navigation.component.html',
+  styleUrl: './navigation.component.scss',
 })
 export class Navigation implements OnDestroy {
   @Input() title: string = '';

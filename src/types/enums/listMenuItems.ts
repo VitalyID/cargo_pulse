@@ -1,4 +1,3 @@
-import { Navigation } from 'src/app/shared/components/navigation/navigation';
 export enum NavigationItems {
   'DOCUMENTS' = 'documents',
   'ANALYTICS' = 'analytics',
