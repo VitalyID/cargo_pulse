@@ -12,8 +12,6 @@
 
 header {
   grid-area: header;
-  padding: var(--spacing-l);
-
   height: rem(75);
   background-color: #753a3a;
 }
@@ -62,22 +60,5 @@ footer {
     position: absolute;
     top: rem(75);
     left: 0;
-
-    // transform: translateX(rem(-180));
-    // transition: all 1s;
   }
-
-  // aside.open-menu-ts {
-  //   transform: translateX(rem(0));
-  //   transition: all 1s;
-
-  //   .icon-close {
-  //     display: block;
-  //     position: absolute;
-  //     top: calc(var(--spacing-lg) / 2);
-  //     right: calc(var(--spacing-lg) / 2);
-  //     --svgWidth: 24px;
-  //     --svgHeight: 24px;
-  //   }
-  // }
 }

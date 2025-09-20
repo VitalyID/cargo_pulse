@@ -16,3 +16,10 @@
   width: 100%;
   height: 100%;
 }
+
+@media (max-width: 992px) {
+  :host {
+    width: var(--svgWidth, 20px);
+    height: var(--svgHeight, 20px);
+  }
+}
