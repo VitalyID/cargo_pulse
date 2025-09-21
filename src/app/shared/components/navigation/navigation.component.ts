@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MENU_ANIMATION_DELAY } from 'src/app/const';
-import { ToggleMenuService } from 'src/app/services/toggleMenu.service';
+import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
 import { ViewPortService } from 'src/app/services/viewport.service';
 import { SvgSprite } from '../svg-sprite/svg-sprite';
 
@@ -24,20 +25,21 @@ export class Navigation implements OnDestroy {
 
   readonly #menuService = inject(ToggleMenuService);
   readonly #viewPort = inject(ViewPortService);
+  readonly #router = inject(Router);
 
   viewPort = toSignal(this.#viewPort.isAdaptiveSize, { initialValue: { TABLET: false } });
 
   sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
   timeoutID: any;
 
-  iconClick() {
+  iconClick(path: string) {
     // NOTE: When viewPort <= 992px: click on icon is opening title in aside and after 1s attaching new method navigateToSection(). When viewPort > 992px: click on navigation component is start navigateToSection
 
     if (this.viewPort()?.TABLET && !this.isOpenMenu) {
       this.openAsideSection();
     }
     if (this.isOpenMenu) {
-      this.navigateToSection();
+      this.navigateToSection(path);
     }
   }
 
@@ -55,8 +57,9 @@ export class Navigation implements OnDestroy {
     }, MENU_ANIMATION_DELAY);
   }
 
-  navigateToSection() {
+  navigateToSection(path: string) {
     console.log('user navigation');
+    this.#router.navigate([`/${path}`]);
   }
 
   ngOnDestroy(): void {
@@ -64,4 +67,6 @@ export class Navigation implements OnDestroy {
       clearTimeout(this.timeoutID);
     }
   }
+
+  clearTimeoutFn: (timeoutId: number) => void = clearTimeout;
 }

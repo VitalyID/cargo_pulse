@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ToggleMenuService } from './../../../services/toggleMenu.service';
+import { ToggleMenuService } from '../../../services/toggleMenu/toggleMenu.service';
 
 @Component({
   selector: 'app-header',

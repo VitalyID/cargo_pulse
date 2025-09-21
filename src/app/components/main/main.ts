@@ -1,6 +1,6 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ToggleMenuService } from 'src/app/services/toggleMenu.service';
+import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
 
 @Component({
   selector: 'app-main',

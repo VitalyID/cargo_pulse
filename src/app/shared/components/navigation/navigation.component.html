@@ -1,8 +1,12 @@
 <div class="navigation">
-  <div class="navigation__icon" (click)="iconClick()">
+  <div class="navigation__icon" (click)="iconClick(title)">
     <app-svg-sprite [icon]="icon"></app-svg-sprite>
   </div>
-  <div class="navigation__title" [class.open]="sideBarState$ | async" (click)="navigateToSection()">
+  <div
+    class="navigation__title"
+    [class.open]="sideBarState$ | async"
+    (click)="navigateToSection(title)"
+  >
     <span>{{ title || 'No title' }}</span>
 
     @if (closeIcon && viewPort().TABLET) {
