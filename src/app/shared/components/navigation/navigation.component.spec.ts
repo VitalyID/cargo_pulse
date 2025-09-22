@@ -89,14 +89,13 @@ describe('Navigation', () => {
     expect(spyEmit).toHaveBeenCalledWith(true);
   });
 
-  it('should emit userOpenMenu after MENU_ANIMATION_DELAY', () => {
-    fakeAsync(() => {
-      const spyEmit = spyOn(component, 'userOpenMenu');
-      component.openAsideSection();
-      tick(MENU_ANIMATION_DELAY);
-      expect(spyEmit).toHaveBeenCalledWith(true);
-    });
-  });
+  it('should emit userOpenMenu after MENU_ANIMATION_DELAY', fakeAsync(() => {
+    const spyEmit = spyOn(component.userOpenMenu, 'emit');
+    component.openAsideSection();
+    fixture.detectChanges();
+    tick(MENU_ANIMATION_DELAY);
+    expect(spyEmit).toHaveBeenCalledWith(true);
+  }));
 
   it('should router to path', () => {
     const spyNav = spyOn(router, 'navigate');
@@ -105,18 +104,16 @@ describe('Navigation', () => {
     expect(spyNav).toHaveBeenCalledWith([expectedPath]);
   });
 
-  it('should destroy setTimeout', () => {
-    fakeAsync(() => {
-      const spyClearTimeOut = spyOn(component, 'clearTimeoutFn');
-      component.openAsideSection();
-      component.timeoutID = 56;
-      component.ngOnDestroy();
-      tick(MENU_ANIMATION_DELAY);
+  it('should destroy setTimeout', fakeAsync(() => {
+    const spyClearTimeOut = spyOn(component, 'clearTimeoutFn');
+    component.openAsideSection();
+    component.timeoutID = 56;
+    component.ngOnDestroy();
+    tick(MENU_ANIMATION_DELAY);
 
-      fixture.detectChanges();
-      expect(spyClearTimeOut).toHaveBeenCalledWith(56);
-    });
-  });
+    fixture.detectChanges();
+    expect(spyClearTimeOut).toHaveBeenCalledWith(56);
+  }));
 
   it('should call open-method in ToggleMenuService', () => {
     const spyService = spyOn(menuService, 'sideBarOpen');
@@ -132,23 +129,21 @@ describe('Navigation', () => {
     expect(spyService).toBeTruthy();
   });
 
-  it('should set class "open" on div "navigation__title"', () => {
-    fakeAsync(() => {
-      const div = debugElement.query(By.css('.navigation__title'));
-      menuService.sideBarOpen();
-      fixture.detectChanges();
-      const classOpen = div.nativeElement.classList.contains('open');
-      expect(classOpen).toBeTruthy();
-    });
-  });
+  it('should set class "open" on div "navigation__title"', fakeAsync(() => {
+    const div = debugElement.query(By.css('.navigation__title'));
+    menuService.sideBarOpen();
+    fixture.detectChanges();
+    tick();
+    const classOpen = div.nativeElement.classList.contains('open');
+    expect(classOpen).toBeTruthy();
+  }));
 
-  it('should set class "close" on div "navigation__title"', () => {
-    fakeAsync(() => {
-      const div = debugElement.query(By.css('.navigation__title'));
-      menuService.sideBarClose();
-      fixture.detectChanges();
-      const classOpen = div.nativeElement.classList.contains('open');
-      expect(classOpen).toBeFalsy();
-    });
-  });
+  it('should remove class "open" on div "navigation__title"', fakeAsync(() => {
+    const div = debugElement.query(By.css('.navigation__title'));
+    menuService.sideBarClose();
+    fixture.detectChanges();
+    tick();
+    const classOpen = div.nativeElement.classList.contains('open');
+    expect(classOpen).toBeFalsy();
+  }));
 });

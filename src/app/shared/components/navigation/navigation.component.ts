@@ -64,7 +64,7 @@ export class Navigation implements OnDestroy {
 
   ngOnDestroy(): void {
     if (this.timeoutID) {
-      clearTimeout(this.timeoutID);
+      this.clearTimeoutFn(this.timeoutID);
     }
   }
 
