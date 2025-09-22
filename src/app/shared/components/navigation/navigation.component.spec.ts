@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MENU_ANIMATION_DELAY } from 'src/app/const';
 import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
-import { ViewPortService } from 'src/app/services/viewport.service';
+import { ViewPortService } from 'src/app/services/viewport/viewport.service';
 import { SvgSprite } from '../svg-sprite/svg-sprite';
 import { Navigation } from './navigation.component';
 

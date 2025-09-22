@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MENU_ANIMATION_DELAY } from 'src/app/const';
 import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
-import { ViewPortService } from 'src/app/services/viewport.service';
+import { ViewPortService } from 'src/app/services/viewport/viewport.service';
 import { SvgSprite } from '../svg-sprite/svg-sprite';
 
 @Component({

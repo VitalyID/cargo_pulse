@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ViewPortService } from 'src/app/services/viewport.service';
+import { ViewPortService } from 'src/app/services/viewport/viewport.service';
 import {
   NAVIGATION_ICONS,
   NAVIGATION_LABELS,
