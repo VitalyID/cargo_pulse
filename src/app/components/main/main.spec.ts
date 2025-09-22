@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DebugElement, inject } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
 import { AsideModule } from '../layots/aside/aside.module';
 import { HeaderModule } from '../layots/header/header.module';
@@ -11,7 +11,6 @@ describe('Main', () => {
   let component: Main;
   let fixture: ComponentFixture<Main>;
   let service: ToggleMenuService;
-  let compiled: HTMLElement;
   let debugElement: DebugElement;
 
   beforeEach(async () => {
@@ -22,7 +21,7 @@ describe('Main', () => {
     fixture = TestBed.createComponent(Main);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    compiled = fixture.nativeElement as HTMLElement;
+
     debugElement = fixture.debugElement;
     service = TestBed.inject(ToggleMenuService);
   });
@@ -32,11 +31,19 @@ describe('Main', () => {
   });
 
   it('should listen ESC-key', () => {
-    const spyService = spyOn(component, 'menuClose');
-    const keyboard = new KeyboardEvent('keyup', { key: 'Escape' });
+    const spySideBarCLose = spyOn(component, 'sideBarClose');
+    const keyboardESC = new KeyboardEvent('keyup', { key: 'Escape' });
     const document = debugElement.nativeElement.ownerDocument;
-    document.dispatchEvent(keyboard);
-    expect(spyService).toHaveBeenCalled();
+    document.dispatchEvent(keyboardESC);
+    expect(spySideBarCLose).toHaveBeenCalled();
+  });
+
+  it('should no react for other ESC-key', () => {
+    const spySideBarCLose = spyOn(component, 'sideBarClose');
+    const keyboardTab = new KeyboardEvent('keyup', { key: 'tab' });
+    const document = debugElement.nativeElement.ownerDocument;
+    document.dispatchEvent(keyboardTab);
+    expect(spySideBarCLose).toHaveBeenCalledTimes(0);
   });
 
   it('should work sideBarClose()', () => {
