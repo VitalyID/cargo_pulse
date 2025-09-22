@@ -15,15 +15,10 @@ export class Main {
 
   readonly #menuService = inject(ToggleMenuService);
 
-  sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
-
   menuClose(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       this.sideBarClose();
     }
-  }
-  menuOff() {
-    this.sideBarClose();
   }
 
   sideBarClose() {
