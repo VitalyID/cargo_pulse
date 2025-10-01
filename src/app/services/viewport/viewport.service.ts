@@ -6,7 +6,11 @@ import { Breakpoint } from 'src/types/enums/breakpoint';
 @Injectable({ providedIn: 'root' })
 export class ViewPortService {
   breakpoints: Record<keyof typeof Breakpoint, boolean> = {
-    TABLET: false,
+    XXLARGE: false,
+    XLARGE: false,
+    LARGE: false,
+    MEDIUM: false,
+    SMALL: false,
   };
 
   private resizeSubscription: Subscription;

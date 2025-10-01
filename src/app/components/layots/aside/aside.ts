@@ -16,7 +16,9 @@ import { NavigationConfig } from 'src/types/interfaces/navigationConf';
 })
 export class Aside {
   readonly #viewPort = inject(ViewPortService);
-  viewPort = toSignal(this.#viewPort.isAdaptiveSize, { initialValue: { TABLET: false } });
+  viewPort = toSignal(this.#viewPort.isAdaptiveSize, {
+    initialValue: { XXLARGE: false, XLARGE: false, LARGE: false, MEDIUM: false, SMALL: false },
+  });
   navigationItems: NavigationConfig[] = this.createNavigationItems();
 
   navigateToSection() {

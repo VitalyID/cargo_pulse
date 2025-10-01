@@ -27,7 +27,15 @@ export class Navigation implements OnDestroy {
   readonly #viewPort = inject(ViewPortService);
   readonly #router = inject(Router);
 
-  viewPort = toSignal(this.#viewPort.isAdaptiveSize, { initialValue: { TABLET: false } });
+  viewPort = toSignal(this.#viewPort.isAdaptiveSize, {
+    initialValue: {
+      XXLARGE: false,
+      XLARGE: false,
+      LARGE: false,
+      MEDIUM: false,
+      SMALL: false,
+    },
+  });
 
   sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
   timeoutID: any;
@@ -35,7 +43,7 @@ export class Navigation implements OnDestroy {
   iconClick(path: string) {
     // NOTE: When viewPort <= 992px: click on icon is opening title in aside and after 1s attaching new method navigateToSection(). When viewPort > 992px: click on navigation component is start navigateToSection
 
-    if (this.viewPort()?.TABLET && !this.isOpenMenu) {
+    if (this.viewPort()?.LARGE && !this.isOpenMenu) {
       this.openAsideSection();
     }
     if (this.isOpenMenu) {

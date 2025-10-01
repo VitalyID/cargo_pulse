@@ -1,6 +1,6 @@
 @for (section of navigationItems; track $index) {
   <app-navigation
-    (click)="!viewPort().TABLET"
+    (click)="!viewPort().LARGE"
     [icon]="section.icon"
     [title]="section.title"
     [closeIcon]="$index === 0"
