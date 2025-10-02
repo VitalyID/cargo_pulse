@@ -1,5 +1,6 @@
 @import '../../../scss/functions';
 @import '../../../scss/mixins';
+@import '../../../scss/variables';
 
 .header {
   @include flex($justify: start);

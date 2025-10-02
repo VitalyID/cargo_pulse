@@ -15,16 +15,49 @@
   --border-radius-lg: #{$spacing-lg};
 
   --asideWidth: #{rem(250)};
-  --asideWidth992: #{rem(200)};
+  --asideLogoWidth: #{rem(24)};
+  --asideLogoHeight: #{rem(24)};
 }
 
-html {
-  font-size: $base-font-size;
+@media (max-width: 1200px) {
+  :root {
+    --base-font-size: 19;
+    --spacing-xs: #{rem(3)};
+    --spacing-sm: #{rem(6)};
+    --spacing-md: #{rem(12)};
+    --spacing-lg: #{rem(20)};
+    --spacing-xl: #{rem(26)};
+    --spacing-xxl: #{rem(36)};
+
+    --border-radius-sm: #{rem(3)};
+    --border-radius-md: #{rem(6)};
+    --border-radius-lg: #{rem(12)};
+
+    --asideWidth: #{rem(180)};
+  }
 }
 
 @media (max-width: 992px) {
   :root {
-    --base-font-size: 14px;
+    --base-font-size: 18;
+    --spacing-xs: #{rem(3)};
+    --spacing-sm: #{rem(6)};
+    --spacing-md: #{rem(12)};
+    --spacing-lg: #{rem(20)};
+    --spacing-xl: #{rem(26)};
+    --spacing-xxl: #{rem(36)};
+
+    --border-radius-sm: #{rem(3)};
+    --border-radius-md: #{rem(6)};
+    --border-radius-lg: #{rem(12)};
+
+    --asideWidth: #{rem(400)};
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --base-font-size: 19;
     --spacing-xs: #{rem(3)};
     --spacing-sm: #{rem(6)};
     --spacing-md: #{rem(12)};
@@ -37,6 +70,28 @@ html {
     --border-radius-lg: #{rem(12)};
 
     --asideWidth: #{rem(250)};
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --base-font-size: 14;
+    --spacing-xs: #{rem(3)};
+    --spacing-sm: #{rem(6)};
+    --spacing-md: #{rem(9)};
+    --spacing-lg: #{rem(12)};
+    --spacing-xl: #{rem(18)};
+    --spacing-xxl: #{rem(22)};
+
+    --border-radius-sm: #{rem(3)};
+    --border-radius-md: #{rem(6)};
+    --border-radius-lg: #{rem(9)};
+
+    --asideWidth: #{rem(250)};
     --asideWidth992: #{rem(200)};
   }
+}
+
+html {
+  font-size: var(--base-font-size);
 }

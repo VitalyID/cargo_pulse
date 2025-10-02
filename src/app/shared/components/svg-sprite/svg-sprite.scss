@@ -1,6 +1,6 @@
 :host {
-  width: var(--svgWidth, 24px);
-  height: var(--svgHeight, 24px);
+  width: var(--asideLogoWidth, 24px);
+  height: var(--asideLogoHeight, 24px);
 }
 
 .icon {
@@ -19,7 +19,7 @@
 
 @media (max-width: 992px) {
   :host {
-    width: var(--svgWidth, 20px);
-    height: var(--svgHeight, 20px);
+    width: var(--asideLogoWidth, 20px);
+    height: var(--asideLogoHeight, 20px);
   }
 }
