@@ -9,7 +9,10 @@ export enum NavigationItems {
   'DRIVER' = 'driver',
 }
 
-export const NAVIGATION_ICONS: Record<NavigationItems, string> = {
+export const NAVIGATION_ICONS: Record<
+  NavigationItems,
+  string
+> = {
   [NavigationItems.DOCUMENTS]: 'icon-file-text',
   [NavigationItems.ANALYTICS]: 'icon-stats-dots',
   [NavigationItems.COST]: 'icon-dollar-sign',
@@ -20,7 +23,10 @@ export const NAVIGATION_ICONS: Record<NavigationItems, string> = {
   [NavigationItems.DRIVER]: 'icon-users',
 };
 
-export const NAVIGATION_LABELS: Record<NavigationItems, string> = {
+export const NAVIGATION_LABELS: Record<
+  NavigationItems,
+  string
+> = {
   [NavigationItems.DOCUMENTS]: 'Документы',
   [NavigationItems.ANALYTICS]: 'Аналитика',
   [NavigationItems.COST]: 'Затраты',

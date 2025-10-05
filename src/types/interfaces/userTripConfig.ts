@@ -1,14 +1,16 @@
 export interface UserTripConfig {
   date: string;
   mileage: number;
+  driver: string;
+  licensePlate: string;
   actualWorkTime: number;
   fuelConsumption: number;
-  fuelCost: string;
-  primeCost: string;
-  taxCost?: string;
-  officeCost: string;
-  otherCost: string;
-  revenue: string;
-  margin: string;
-  marginality: string;
+  fuelCost: number;
+  primeCost: number;
+  taxCost?: number;
+  officeCost: number;
+  otherCost: number;
+  revenue: number;
+  margin: number;
+  marginality: number;
 }

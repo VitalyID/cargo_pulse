@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -37,7 +44,8 @@ export class Navigation implements OnDestroy {
     },
   });
 
-  sideBarState$: Observable<boolean> = this.#menuService.sideBarState;
+  sideBarState$: Observable<boolean> =
+    this.#menuService.sideBarState;
   timeoutID: any;
 
   iconClick(path: string) {
@@ -76,5 +84,6 @@ export class Navigation implements OnDestroy {
     }
   }
 
-  clearTimeoutFn: (timeoutId: number) => void = clearTimeout;
+  clearTimeoutFn: (timeoutId: number) => void =
+    clearTimeout;
 }

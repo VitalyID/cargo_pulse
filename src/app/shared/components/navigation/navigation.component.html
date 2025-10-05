@@ -1,5 +1,8 @@
 <div class="navigation">
-  <div class="navigation__icon" (click)="iconClick(title)">
+  <div
+    class="navigation__icon"
+    (click)="iconClick(title)"
+  >
     <app-svg-sprite [icon]="icon"></app-svg-sprite>
   </div>
   <div
@@ -10,7 +13,11 @@
     <span>{{ title || 'No title' }}</span>
 
     @if (closeIcon && viewPort().LARGE) {
-      <app-svg-sprite icon="icon-x-circle" class="icon-close" (click)="menuOff()"></app-svg-sprite>
+      <app-svg-sprite
+        icon="icon-x-circle"
+        class="icon-close"
+        (click)="menuOff()"
+      ></app-svg-sprite>
     }
   </div>
 </div>

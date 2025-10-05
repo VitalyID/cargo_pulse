@@ -3,18 +3,20 @@ import {
   TestBed,
 } from '@angular/core/testing';
 
-import { Svg } from './svg';
+import { GenericTableComponent } from './generic-table-component';
 
-describe('Svg', () => {
-  let component: Svg;
-  let fixture: ComponentFixture<Svg>;
+describe('GenericTableComponent', () => {
+  let component: GenericTableComponent;
+  let fixture: ComponentFixture<GenericTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Svg],
+      imports: [GenericTableComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Svg);
+    fixture = TestBed.createComponent(
+      GenericTableComponent
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

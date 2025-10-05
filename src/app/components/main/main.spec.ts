@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
 import { DebugElement } from '@angular/core';
 import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
@@ -31,17 +34,29 @@ describe('Main', () => {
   });
 
   it('should listen ESC-key', () => {
-    const spySideBarCLose = spyOn(component, 'sideBarClose');
-    const keyboardESC = new KeyboardEvent('keyup', { key: 'Escape' });
-    const document = debugElement.nativeElement.ownerDocument;
+    const spySideBarCLose = spyOn(
+      component,
+      'sideBarClose'
+    );
+    const keyboardESC = new KeyboardEvent('keyup', {
+      key: 'Escape',
+    });
+    const document =
+      debugElement.nativeElement.ownerDocument;
     document.dispatchEvent(keyboardESC);
     expect(spySideBarCLose).toHaveBeenCalled();
   });
 
   it('should no react for other ESC-key', () => {
-    const spySideBarCLose = spyOn(component, 'sideBarClose');
-    const keyboardTab = new KeyboardEvent('keyup', { key: 'tab' });
-    const document = debugElement.nativeElement.ownerDocument;
+    const spySideBarCLose = spyOn(
+      component,
+      'sideBarClose'
+    );
+    const keyboardTab = new KeyboardEvent('keyup', {
+      key: 'tab',
+    });
+    const document =
+      debugElement.nativeElement.ownerDocument;
     document.dispatchEvent(keyboardTab);
     expect(spySideBarCLose).toHaveBeenCalledTimes(0);
   });

@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+} from '@angular/core';
 import { ToggleMenuService } from '../../../services/toggleMenu/toggleMenu.service';
 
 @Component({

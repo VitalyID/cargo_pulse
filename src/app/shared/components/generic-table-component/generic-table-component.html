@@ -1,0 +1,41 @@
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  (matSortChange)="announceSortChange($event)"
+>
+  <!-- Header Row -->
+  <tr
+    mat-header-row
+    *matHeaderRowDef="displayedColumns()"
+  ></tr>
+
+  <!-- Data Rows -->
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns()"
+  ></tr>
+
+  <!-- Column Definitions -->
+  @for (column of columns(); track column.key) {
+  <ng-container [matColumnDef]="column.key">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+    >
+      {{ column.title }}
+    </th>
+    <td
+      mat-cell
+      *matCellDef="let element"
+    >
+      @if (column.pipe === 'withUnit') { {{
+      column.cell(element) | withUnit: column.pipeArg }} }
+      @if (column.pipe === 'date') { {{ column.cell(element)
+      | date: column.pipeArg }} } @if (!column.pipe) { {{
+      column.cell(element) }} }
+    </td>
+  </ng-container>
+  }
+</table>

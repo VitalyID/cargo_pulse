@@ -1,6 +1,9 @@
 import { EngineService } from './engine-service';
 import { GasService } from './gas-service';
-import { OtherConfig, OtherCostConfig } from './other-cost-config';
+import {
+  OtherConfig,
+  OtherCostConfig,
+} from './other-cost-config';
 import { TiersConfig } from './tiers-config';
 import { TransmissionSystem } from './transmission-system';
 

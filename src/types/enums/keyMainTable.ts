@@ -1,0 +1,16 @@
+export enum KeyTable {
+  date = 'Дата',
+  mileage = 'Пробег',
+  driver = 'Водитель',
+  licensePlate = 'Г/н',
+  actualWorkTime = 'Время работы',
+  fuelConsumption = 'Расход',
+  fuelCost = 'Затраты на топливо',
+  primeCost = 'Себестоимость',
+  taxCost = 'Налог',
+  officeCost = 'Затраты на офис',
+  otherCost = 'Прочие затраты',
+  revenue = 'Выручка',
+  margin = 'Маржа',
+  marginality = 'Маржинальность',
+}

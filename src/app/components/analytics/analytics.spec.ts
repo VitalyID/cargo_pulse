@@ -3,18 +3,18 @@ import {
   TestBed,
 } from '@angular/core/testing';
 
-import { Svg } from './svg';
+import { Analytics } from './analytics';
 
-describe('Svg', () => {
-  let component: Svg;
-  let fixture: ComponentFixture<Svg>;
+describe('Analytics', () => {
+  let component: Analytics;
+  let fixture: ComponentFixture<Analytics>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Svg],
+      imports: [Analytics],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Svg);
+    fixture = TestBed.createComponent(Analytics);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

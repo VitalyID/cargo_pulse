@@ -17,20 +17,29 @@ import { NavigationConfig } from 'src/types/interfaces/navigationConf';
 export class Aside {
   readonly #viewPort = inject(ViewPortService);
   viewPort = toSignal(this.#viewPort.isAdaptiveSize, {
-    initialValue: { XXLARGE: false, XLARGE: false, LARGE: false, MEDIUM: false, SMALL: false },
+    initialValue: {
+      XXLARGE: false,
+      XLARGE: false,
+      LARGE: false,
+      MEDIUM: false,
+      SMALL: false,
+    },
   });
-  navigationItems: NavigationConfig[] = this.createNavigationItems();
+  navigationItems: NavigationConfig[] =
+    this.createNavigationItems();
 
   navigateToSection() {
     console.log('user navigation');
   }
 
   createNavigationItems(isOpenMenu: boolean = false) {
-    return Object.values(NavigationItems).map((itemKey: NavigationItems) => ({
-      icon: NAVIGATION_ICONS[itemKey],
-      title: NAVIGATION_LABELS[itemKey],
-      isOpenMenu,
-    }));
+    return Object.values(NavigationItems).map(
+      (itemKey: NavigationItems) => ({
+        icon: NAVIGATION_ICONS[itemKey],
+        title: NAVIGATION_LABELS[itemKey],
+        isOpenMenu,
+      })
+    );
   }
 
   closeMenu() {
@@ -42,9 +51,11 @@ export class Aside {
   }
 
   updateMenuState(newState: boolean) {
-    this.navigationItems = this.navigationItems.map((item) => ({
-      ...item,
-      isOpenMenu: newState,
-    }));
+    this.navigationItems = this.navigationItems.map(
+      item => ({
+        ...item,
+        isOpenMenu: newState,
+      })
+    );
   }
 }

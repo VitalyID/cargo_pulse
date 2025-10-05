@@ -27,14 +27,18 @@ describe('viewPortService', () => {
   });
 
   it('should viewPort is "Desktop"', () => {
-    spyOn(window, 'matchMedia').and.callFake(testCallFake(false));
+    spyOn(window, 'matchMedia').and.callFake(
+      testCallFake(false)
+    );
     service.updateBreakpoints();
     const mockResult = service.isAdaptiveSize;
     expect(mockResult.getValue().TABLET).toBeFalse();
   });
 
   it('should viewPort is "Tablet"', () => {
-    spyOn(window, 'matchMedia').and.callFake(testCallFake(true));
+    spyOn(window, 'matchMedia').and.callFake(
+      testCallFake(true)
+    );
     service.updateBreakpoints();
     const mockResult = service.isAdaptiveSize;
     expect(mockResult.getValue().TABLET).toBeTruthy();

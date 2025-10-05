@@ -1,12 +1,11 @@
 @for (section of navigationItems; track $index) {
-  <app-navigation
-    (click)="!viewPort().LARGE"
-    [icon]="section.icon"
-    [title]="section.title"
-    [closeIcon]="$index === 0"
-    [isOpenMenu]="section.isOpenMenu || false"
-    (closeMenu)="closeMenu()"
-    (userOpenMenu)="userOpenMenu()"
-  >
-  </app-navigation>
+<app-navigation
+  (click)="!viewPort().LARGE"
+  [icon]="section.icon"
+  [title]="section.title"
+  [closeIcon]="$index === 0"
+  [isOpenMenu]="section.isOpenMenu || false"
+  (closeMenu)="closeMenu()"
+  (userOpenMenu)="userOpenMenu()"
+></app-navigation>
 }

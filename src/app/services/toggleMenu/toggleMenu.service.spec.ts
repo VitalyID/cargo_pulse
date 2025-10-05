@@ -15,15 +15,17 @@ describe('ToggleService', () => {
   });
 
   it('should have initial sidebar of false', async () => {
-    const firstState = await firstValueFrom(service.sideBarState);
+    const firstState = await firstValueFrom(
+      service.sideBarState
+    );
     expect(firstState).toBe(false);
   });
 
-  it('should set true when sideBarOpen', (done) => {
+  it('should set true when sideBarOpen', done => {
     const values: boolean[] = [false];
     service.sideBarOpen();
 
-    service.sideBarState.subscribe((value) => {
+    service.sideBarState.subscribe(value => {
       if (value) {
         values.push(value);
         expect(values).toEqual([false, true]);
@@ -33,11 +35,11 @@ describe('ToggleService', () => {
     done();
   });
 
-  it('should set false when sideBarClose', (done) => {
+  it('should set false when sideBarClose', done => {
     const values: boolean[] = [true];
     service.sideBarClose();
 
-    service.sideBarState.subscribe((value) => {
+    service.sideBarState.subscribe(value => {
       if (!value) {
         values.push(value);
         expect(values).toEqual([true, false]);

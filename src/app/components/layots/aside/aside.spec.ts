@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
 import {
   NAVIGATION_ICONS,
@@ -28,12 +31,14 @@ describe('Aside', () => {
 
   it('should length list of section is matched length NavigationItems', () => {
     const createdList = component.createNavigationItems();
-    expect(createdList.length).toEqual(Object.entries(NavigationItems).length);
+    expect(createdList.length).toEqual(
+      Object.entries(NavigationItems).length
+    );
   });
 
   it('should keys of list of section is matched values of NAVIGATION_LABELS', () => {
     const createdList = component.createNavigationItems();
-    const keys = createdList.map((section) => {
+    const keys = createdList.map(section => {
       return section.title;
     });
     expect(keys).toEqual(Object.values(NAVIGATION_LABELS));
@@ -41,7 +46,7 @@ describe('Aside', () => {
 
   it('should values of list of section is matched values of NAVIGATION_LABELS', () => {
     const createdList = component.createNavigationItems();
-    const values = createdList.map((section) => {
+    const values = createdList.map(section => {
       return section.icon;
     });
     expect(values).toEqual(Object.values(NAVIGATION_ICONS));
@@ -95,10 +100,10 @@ describe('Aside', () => {
 
   it('should updateMenuState is worked(false)', () => {
     component.updateMenuState(false);
-    const state = component.navigationItems.map((isOpen) => {
+    const state = component.navigationItems.map(isOpen => {
       return isOpen.isOpenMenu;
     });
-    const result = state.every((state) => {
+    const result = state.every(state => {
       return !state;
     });
     expect(result).toBeTruthy();
@@ -106,10 +111,10 @@ describe('Aside', () => {
 
   it('should updateMenuState is worked(true)', () => {
     component.updateMenuState(true);
-    const state = component.navigationItems.map((isOpen) => {
+    const state = component.navigationItems.map(isOpen => {
       return isOpen.isOpenMenu;
     });
-    const result = state.every((state) => {
+    const result = state.every(state => {
       return state;
     });
     expect(result).toBeTruthy();

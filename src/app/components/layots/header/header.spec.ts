@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SvgSprite } from './../../../shared/components/svg-sprite/svg-sprite';
 
@@ -30,14 +33,19 @@ describe('Header', () => {
   });
 
   it('should call ToggleMenuService', () => {
-    const icon = debugElement.query(By.css('app-svg-sprite'));
+    const icon = debugElement.query(
+      By.css('app-svg-sprite')
+    );
     const spyClick = spyOn(component, 'toggleMenu');
     icon.nativeElement.dispatchEvent(new Event('click'));
     expect(spyClick).toHaveBeenCalled();
   });
 
   it('should call service by click toggleMenu()', () => {
-    const spyService = spyOn(toggleMenuService, 'sideBarOpen');
+    const spyService = spyOn(
+      toggleMenuService,
+      'sideBarOpen'
+    );
     component.toggleMenu();
     expect(spyService).toHaveBeenCalled();
   });

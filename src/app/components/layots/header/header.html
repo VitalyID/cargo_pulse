@@ -1,13 +1,25 @@
 <div class="header">
   <div class="header__left">
     <!-- control to display by css -->
-    <app-svg-sprite icon="icon-menu" (click)="toggleMenu()"></app-svg-sprite>
+    <app-svg-sprite
+      icon="icon-menu"
+      (click)="toggleMenu()"
+    ></app-svg-sprite>
 
     <picture>
-      <source srcset="/assets/images/logo.webp" type="image/webp" />
-      <source srcset="/assets/images/logo.png" type="image/png" />
+      <source
+        srcset="/assets/images/logo.webp"
+        type="image/webp"
+      />
+      <source
+        srcset="/assets/images/logo.png"
+        type="image/png"
+      />
 
-      <img src="/assets/images/logo.png" alt="Логотип" />
+      <img
+        src="/assets/images/logo.png"
+        alt="Логотип"
+      />
     </picture>
   </div>
 

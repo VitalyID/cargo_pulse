@@ -1,4 +1,9 @@
-@mixin flex($justify: center, $alight: center, $gap: 0, $direction: row) {
+@mixin flex(
+  $justify: center,
+  $alight: center,
+  $gap: 0,
+  $direction: row
+) {
   display: flex;
   justify-content: $justify;
   align-items: $alight;

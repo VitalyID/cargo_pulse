@@ -19,7 +19,9 @@
   &__title {
     @include flex($justify: start);
 
-    height: calc(var(--asideLogoHeight) + var(--spacing-lg) * 2);
+    height: calc(
+      var(--asideLogoHeight) + var(--spacing-lg) * 2
+    );
 
     padding-left: 0;
     background-color: #326b66;
@@ -44,7 +46,9 @@
       width: rem(150);
       position: absolute;
 
-      left: calc(var(--spacing-lg) * 2 + var(--asideLogoWidth));
+      left: calc(
+        var(--spacing-lg) * 2 + var(--asideLogoWidth)
+      );
       padding-left: 2px;
       transform: translateX(-100%);
       transition: transform 1s;

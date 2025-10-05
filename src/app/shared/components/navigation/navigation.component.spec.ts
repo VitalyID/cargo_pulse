@@ -1,5 +1,10 @@
 import { DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MENU_ANIMATION_DELAY } from 'src/app/const';
@@ -50,34 +55,54 @@ describe('Navigation', () => {
   it('should to send icon to svg-component', () => {
     component.icon = 'icon-globe';
     fixture.detectChanges();
-    const sendData = debugElement.query(By.directive(SvgSprite));
-    expect(sendData.componentInstance.icon).toBe('icon-globe');
+    const sendData = debugElement.query(
+      By.directive(SvgSprite)
+    );
+    expect(sendData.componentInstance.icon).toBe(
+      'icon-globe'
+    );
   });
 
   it('should to display icon-close', () => {
     component.closeIcon = true;
     viewService.isAdaptiveSize.next({ TABLET: true });
     fixture.detectChanges();
-    const iconClose = debugElement.query(By.css('app-svg-sprite[icon="icon-x-circle"]'));
+    const iconClose = debugElement.query(
+      By.css('app-svg-sprite[icon="icon-x-circle"]')
+    );
     expect(iconClose).toBeTruthy();
   });
 
   it('should call openAsideSection() when viewport is TABLET and menu is closed', () => {
-    const spyOpenAsideSection = spyOn(component, 'openAsideSection');
+    const spyOpenAsideSection = spyOn(
+      component,
+      'openAsideSection'
+    );
     component.isOpenMenu = false;
 
-    const sectionTitle = debugElement.query(By.css('.navigation__icon'));
-    sectionTitle.nativeElement.dispatchEvent(new Event('click'));
+    const sectionTitle = debugElement.query(
+      By.css('.navigation__icon')
+    );
+    sectionTitle.nativeElement.dispatchEvent(
+      new Event('click')
+    );
     viewService.isAdaptiveSize.next({ TABLET: false });
     fixture.detectChanges();
     expect(spyOpenAsideSection).toHaveBeenCalled();
   });
 
   it('should be navigateToSection() when is navigation__title is open', () => {
-    const spyNavigateToSection = spyOn(component, 'navigateToSection');
-    const sectionTitle = debugElement.query(By.css('.navigation__icon'));
+    const spyNavigateToSection = spyOn(
+      component,
+      'navigateToSection'
+    );
+    const sectionTitle = debugElement.query(
+      By.css('.navigation__icon')
+    );
     component.isOpenMenu = true;
-    sectionTitle.nativeElement.dispatchEvent(new Event('click'));
+    sectionTitle.nativeElement.dispatchEvent(
+      new Event('click')
+    );
     fixture.detectChanges();
     expect(spyNavigateToSection).toHaveBeenCalled();
   });
@@ -105,7 +130,10 @@ describe('Navigation', () => {
   });
 
   it('should destroy setTimeout', fakeAsync(() => {
-    const spyClearTimeOut = spyOn(component, 'clearTimeoutFn');
+    const spyClearTimeOut = spyOn(
+      component,
+      'clearTimeoutFn'
+    );
     component.openAsideSection();
     component.timeoutID = 56;
     component.ngOnDestroy();
@@ -130,20 +158,26 @@ describe('Navigation', () => {
   });
 
   it('should set class "open" on div "navigation__title"', fakeAsync(() => {
-    const div = debugElement.query(By.css('.navigation__title'));
+    const div = debugElement.query(
+      By.css('.navigation__title')
+    );
     menuService.sideBarOpen();
     fixture.detectChanges();
     tick();
-    const classOpen = div.nativeElement.classList.contains('open');
+    const classOpen =
+      div.nativeElement.classList.contains('open');
     expect(classOpen).toBeTruthy();
   }));
 
   it('should remove class "open" on div "navigation__title"', fakeAsync(() => {
-    const div = debugElement.query(By.css('.navigation__title'));
+    const div = debugElement.query(
+      By.css('.navigation__title')
+    );
     menuService.sideBarClose();
     fixture.detectChanges();
     tick();
-    const classOpen = div.nativeElement.classList.contains('open');
+    const classOpen =
+      div.nativeElement.classList.contains('open');
     expect(classOpen).toBeFalsy();
   }));
 });

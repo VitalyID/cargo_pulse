@@ -1,6 +1,10 @@
-import { Component, HostListener, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  Component,
+  HostListener,
+  inject,
+} from '@angular/core';
 import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
+import { UserTripConfig } from 'src/types/interfaces/userTripConfig';
 
 @Component({
   selector: 'app-main',
@@ -9,7 +13,8 @@ import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.servic
   styleUrl: './main.scss',
 })
 export class Main {
-  @HostListener('document:keyup', ['$event']) menuCloseToggler(event: KeyboardEvent) {
+  @HostListener('document:keyup', ['$event'])
+  menuCloseToggler(event: KeyboardEvent) {
     this.menuClose(event);
   }
 
