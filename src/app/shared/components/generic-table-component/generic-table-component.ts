@@ -88,4 +88,8 @@ export class GenericTableComponent
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+  clickedRows(row: UserTripConfig) {
+    console.log(row.id);
+  }
 }

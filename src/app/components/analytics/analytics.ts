@@ -16,6 +16,7 @@ import { UserTripConfig } from './../../../types/interfaces/userTripConfig';
 export class Analytics {
   userTripData: UserTripConfig[] = [
     {
+      id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
       date: '2024-01-15T00:00:00.000Z',
       mileage: 245,
       driver: 'Иванов А.С.',
@@ -32,6 +33,7 @@ export class Analytics {
       marginality: 43.3,
     },
     {
+      id: 'b2c3d4e5-f6g7-8901-bcde-f23456789012',
       date: '2024-01-16T00:00:00.000Z',
       mileage: 180,
       driver: 'Петров В.И.',
@@ -47,6 +49,7 @@ export class Analytics {
       marginality: 42.4,
     },
     {
+      id: 'c3d4e5f6-g7h8-9012-cdef-345678901234',
       date: '2024-01-17T00:00:00.000Z',
       mileage: 320,
       driver: 'Сидоров М.П.',
@@ -63,6 +66,7 @@ export class Analytics {
       marginality: 46.7,
     },
     {
+      id: 'd4e5f6g7-h8i9-0123-defg-456789012345',
       date: '2024-01-18T00:00:00.000Z',
       mileage: 150,
       driver: 'Козлов Д.В.',
@@ -78,6 +82,7 @@ export class Analytics {
       marginality: 40.8,
     },
     {
+      id: 'e5f6g7h8-i9j0-1234-efgh-567890123456',
       date: '2024-01-19T00:00:00.000Z',
       mileage: 275,
       driver: 'Никитин С.К.',
@@ -94,6 +99,7 @@ export class Analytics {
       marginality: 43.5,
     },
     {
+      id: 'f6g7h8i9-j0k1-2345-fghi-678901234567',
       date: '2024-01-20T00:00:00.000Z',
       mileage: 195,
       driver: 'Федоров П.М.',
@@ -109,6 +115,7 @@ export class Analytics {
       marginality: 40.9,
     },
     {
+      id: 'g7h8i9j0-k1l2-3456-ghij-789012345678',
       date: '2024-01-21T00:00:00.000Z',
       mileage: 420,
       driver: 'Морозов А.В.',
@@ -125,6 +132,7 @@ export class Analytics {
       marginality: 49.1,
     },
     {
+      id: 'h8i9j0k1-l2m3-4567-hijk-890123456789',
       date: '2024-01-22T00:00:00.000Z',
       mileage: 165,
       driver: 'Волков И.С.',
@@ -140,6 +148,7 @@ export class Analytics {
       marginality: 41.0,
     },
     {
+      id: 'i9j0k1l2-m3n4-5678-ijkl-901234567890',
       date: '2024-01-23T00:00:00.000Z',
       mileage: 290,
       driver: 'Лебедев Н.А.',
@@ -156,6 +165,7 @@ export class Analytics {
       marginality: 46.9,
     },
     {
+      id: 'j0k1l2m3-n4o5-6789-jklm-012345678901',
       date: '2024-01-24T00:00:00.000Z',
       mileage: 230,
       driver: 'Соловьев Д.К.',

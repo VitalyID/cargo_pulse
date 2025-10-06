@@ -14,6 +14,7 @@
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns()"
+    (click)="clickedRows(row)"
   ></tr>
 
   <!-- Column Definitions -->

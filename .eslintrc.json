@@ -11,7 +11,48 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:prettier/recommended"
       ],
+      "plugins": ["no-commented-code"],
       "rules": {
+        // Запрет console.log
+        "no-console": [
+          "warn",
+          {
+            "allow": ["warn", "error"]
+          }
+        ],
+        
+        // Запрет debugger
+        "no-debugger": "warn",
+        
+        // Запрет alert
+        "no-alert": "warn",
+        
+        // Обнаружение закомментированного кода
+        "no-commented-code/no-commented-code": "warn",
+        
+        // Запрет пустых блоков кода
+        "no-empty": "warn",
+        
+        // Запрет неиспользуемых переменных
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_"
+          }
+        ],
+        
+        // Другие полезные правила
+        "no-var": "error",
+        "prefer-const": "warn",
+        "no-multiple-empty-lines": [
+          "warn",
+          {
+            "max": 1,
+            "maxEOF": 0
+          }
+        ],
+        
         "@angular-eslint/directive-selector": [
           "error",
           {

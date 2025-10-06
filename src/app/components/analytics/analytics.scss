@@ -1,0 +1,22 @@
+@import '../../scss/variables';
+@import '../../scss/functions';
+
+.analytics__config {
+  display: inline-block;
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: $spacing-md;
+  position: relative;
+
+  & span {
+    position: absolute;
+    top: rem(-20);
+    left: rem(15);
+    background-color: $backgroundColor-main;
+    padding: $spacing-sm;
+  }
+}
+
+p {
+  margin-top: 0;
+}

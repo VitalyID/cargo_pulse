@@ -1,4 +1,5 @@
 export interface UserTripConfig {
+  id: string;
   date: string;
   mileage: number;
   driver: string;

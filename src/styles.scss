@@ -140,3 +140,34 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+table .mat-column-primeCost {
+  background: #{$background-cost} !important;
+  cursor: pointer;
+  text-align: center !important;
+}
+
+table .mat-column-revenue {
+  background: #{$background-revenue} !important;
+  text-align: center !important;
+}
+
+table .mat-column-margin {
+  background: #{$background-margin} !important;
+  text-align: center !important;
+}
+table .mat-column-marginality {
+  text-align: center !important;
+}
+
+table .mat-sort-header-container {
+  justify-content: center;
+}
+
+table .mat-column-fuelConsumption {
+  text-align: center !important;
+}
+
+table .mat-column-actualWorkTime {
+  text-align: center !important;
+}

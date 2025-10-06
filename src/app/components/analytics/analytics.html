@@ -1,5 +1,14 @@
-<app-generic-table-component
-  [userTrips]="userTripData"
-  [columns]="columns"
-  [displayedColumns]="displayedColumns"
-></app-generic-table-component>
+<div class="analytics">
+  <div class="analytics__config">
+    <span>Настройки таблицы</span>
+    <p>Водитель</p>
+    <p>Гос. номер</p>
+    <p>Контрагент</p>
+  </div>
+
+  <app-generic-table-component
+    [userTrips]="userTripData"
+    [columns]="columns"
+    [displayedColumns]="displayedColumns"
+  ></app-generic-table-component>
+</div>
