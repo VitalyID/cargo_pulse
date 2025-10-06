@@ -1,16 +1,26 @@
 <div class="analytics">
-  <div class="analytics__config">
+  <div class="analytics__top">
+    <div class="analytics__title">
+      <h2>Аналитическа информация</h2>
+    </div>
+    <button matButton="outlined">Настройки раздела</button>
+  </div>
+
+  <!-- <div class="analytics__config">
     <span>Настройки таблицы</span>
     <p>Водитель</p>
     <p>Гос. номер</p>
     <p>Контрагент</p>
     <p>Средний расход топлива</p>
     <p>Время работы</p>
-  </div>
+  </div> -->
 
-  <app-generic-table-component
-    [userTrips]="userTripData"
-    [columns]="columns"
-    [displayedColumns]="displayedColumns"
-  ></app-generic-table-component>
+  <div class="analytics__table">
+    <app-generic-table-component
+      [userTrips]="userTripData"
+      [columns]="columns"
+      [displayedColumns]="displayedColumns"
+    ></app-generic-table-component>
+    <mat-paginator></mat-paginator>
+  </div>
 </div>

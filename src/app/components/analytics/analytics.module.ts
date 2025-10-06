@@ -4,6 +4,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { GenericTableComponent } from 'src/app/shared/components/generic-table-component/generic-table-component';
 import { Analytics } from './analytics';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { Analytics } from './analytics';
     MatSortModule,
     MatPaginatorModule,
     GenericTableComponent,
+    MatButtonModule,
   ],
   exports: [Analytics],
   declarations: [Analytics],

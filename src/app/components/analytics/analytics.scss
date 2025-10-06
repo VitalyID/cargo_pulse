@@ -1,20 +1,43 @@
 @import '../../scss/variables';
 @import '../../scss/functions';
+@import '../../scss/mixins.scss';
 
-.analytics__config {
-  display: inline-block;
-  border: solid black 1px;
-  border-radius: 10px;
-  padding: $spacing-md;
-  position: relative;
-  margin-bottom: $spacing-md;
+.analytics {
+  &__top {
+    @include flex($justify: space-between);
+    margin-bottom: $spacing-md;
+  }
 
-  & span {
-    position: absolute;
-    top: rem(-20);
-    left: rem(15);
-    background-color: $backgroundColor-main;
-    padding: $spacing-sm;
+  &__title {
+    @include flex();
+    width: 100%;
+  }
+
+  & button {
+    --mat-button-outlined-label-text-color: rgb(0, 0, 0);
+    --mat-button-outlined-outline-color: dark;
+  }
+
+  &__table {
+    border-radius: $border-radius-table;
+    overflow: hidden;
+  }
+
+  &__config {
+    display: inline-block;
+    border: solid black 1px;
+    border-radius: 10px;
+    padding: $spacing-md;
+    position: relative;
+    margin-bottom: $spacing-md;
+
+    & span {
+      position: absolute;
+      top: rem(-20);
+      left: rem(15);
+      background-color: $backgroundColor-main;
+      padding: $spacing-sm;
+    }
   }
 }
 
