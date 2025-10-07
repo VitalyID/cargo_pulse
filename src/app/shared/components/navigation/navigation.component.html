@@ -1,4 +1,9 @@
-<div class="navigation">
+<div
+  class="navigation"
+  [routerLink]="routerLink"
+  routerLinkActive="isActive"
+  [routerLinkActiveOptions]="{ exact: false }"
+>
   <div
     class="navigation__icon"
     (click)="iconClick(title)"

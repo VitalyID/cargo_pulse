@@ -10,8 +10,9 @@ export const routes: Routes = [
   },
 ];
 
-NgModule({
+@NgModule({
   declarations: [],
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
-});
+})
+export class AnalyticsRoutingModule {}

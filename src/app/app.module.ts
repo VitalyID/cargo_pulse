@@ -5,7 +5,7 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { App } from './app';
-import { routes } from './app.routes';
+import { AppRoutingModule, routes } from './app.routes';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorLocale } from './shared/services/custom-paginator-intl.service';
 
@@ -14,6 +14,7 @@ import { CustomPaginatorLocale } from './shared/services/custom-paginator-intl.s
     RouterOutlet,
     BrowserModule,
     RouterModule.forRoot(routes),
+    AppRoutingModule,
   ],
   exports: [App],
   declarations: [App],

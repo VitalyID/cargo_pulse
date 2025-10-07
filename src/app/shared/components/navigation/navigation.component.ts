@@ -4,21 +4,34 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnChanges,
   OnDestroy,
   Output,
+  SimpleChange,
+  SimpleChanges,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterLinkActive,
+  RouterModule,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { MENU_ANIMATION_DELAY } from 'src/app/const';
 import { ToggleMenuService } from 'src/app/services/toggleMenu/toggleMenu.service';
 import { ViewPortService } from 'src/app/services/viewport/viewport.service';
 import { SvgSprite } from '../svg-sprite/svg-sprite';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [SvgSprite, CommonModule],
+  imports: [
+    SvgSprite,
+    CommonModule,
+    RouterLinkActive,
+    RouterModule,
+  ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss',
 })
@@ -27,6 +40,7 @@ export class Navigation implements OnDestroy {
   @Input() icon: string = '';
   @Input() closeIcon: boolean = false;
   @Input() isOpenMenu: boolean = false;
+  @Input() routerLink: string = '';
   @Output() closeMenu = new EventEmitter<boolean>();
   @Output() userOpenMenu = new EventEmitter<boolean>(false);
 

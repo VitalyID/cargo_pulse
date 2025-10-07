@@ -1,18 +1,30 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { Main } from './main';
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     component: Main,
+    children: [
+      {
+        path: '',
+        redirectTo: 'analytics',
+        pathMatch: 'full',
+      },
+      {
+        path: 'analytics',
+        loadChildren: () =>
+          import('../analytics/analytics.module').then(
+            m => m.AnalyticsModule
+          ),
+      },
+    ],
   },
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)], // ← forChild!
   exports: [RouterModule],
 })
 export class MainRoutingModule {}

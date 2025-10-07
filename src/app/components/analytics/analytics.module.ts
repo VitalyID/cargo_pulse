@@ -9,6 +9,8 @@ import { MatTableModule } from '@angular/material/table';
 import { GenericTableComponent } from 'src/app/shared/components/generic-table-component/generic-table-component';
 import { Analytics } from './analytics';
 import { CustomPaginatorLocale } from 'src/app/shared/services/custom-paginator-intl.service';
+import { CommonModule } from '@angular/common';
+import { AnalyticsRoutingModule } from './analytics-routing';
 
 @NgModule({
   imports: [
@@ -17,6 +19,8 @@ import { CustomPaginatorLocale } from 'src/app/shared/services/custom-paginator-
     MatPaginatorModule,
     GenericTableComponent,
     MatButtonModule,
+    CommonModule,
+    AnalyticsRoutingModule,
   ],
   exports: [Analytics],
   declarations: [Analytics],

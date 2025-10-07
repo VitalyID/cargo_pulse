@@ -5,6 +5,7 @@
   [title]="section.title"
   [closeIcon]="$index === 0"
   [isOpenMenu]="section.isOpenMenu || false"
+  [routerLink]="section.rout"
   (closeMenu)="closeMenu()"
   (userOpenMenu)="userOpenMenu()"
 ></app-navigation>

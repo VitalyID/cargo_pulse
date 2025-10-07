@@ -6,6 +6,7 @@ import {
   NAVIGATION_LABELS,
   NavigationItems,
 } from 'src/types/enums/listMenuItems';
+import { NavigationRouts } from 'src/types/enums/navigationRoutes';
 import { NavigationConfig } from 'src/types/interfaces/navigationConf';
 
 @Component({
@@ -38,6 +39,7 @@ export class Aside {
         icon: NAVIGATION_ICONS[itemKey],
         title: NAVIGATION_LABELS[itemKey],
         isOpenMenu,
+        rout: itemKey,
       })
     );
   }

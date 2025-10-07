@@ -6,14 +6,18 @@
     <button matButton="outlined">Настройки раздела</button>
   </div>
 
-  <!-- <div class="analytics__config">
+  <div class="analytics__config">
     <span>Настройки таблицы</span>
     <p>Водитель</p>
     <p>Гос. номер</p>
     <p>Контрагент</p>
+  </div>
+
+  <div class="analytics__config">
+    <span>Настройки таблицы</span>
     <p>Средний расход топлива</p>
     <p>Время работы</p>
-  </div> -->
+  </div>
 
   <div class="analytics__table">
     <app-generic-table-component
@@ -22,10 +26,5 @@
       [displayedColumns]="displayedColumns"
       [listPagination]="LIST_MAIN_TABLE"
     ></app-generic-table-component>
-    <!-- <mat-paginator
-      [pageSize]="5"
-      [pageSizeOptions]="[10,20,31,35,50]"
-      aria-label="Select page"
-    ></mat-paginator> -->
   </div>
 </div>

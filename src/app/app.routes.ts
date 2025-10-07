@@ -1,21 +1,20 @@
-import { Routes } from '@angular/router';
-import { Main } from './components/main/main';
-import { Analytics } from './components/analytics/analytics';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Main,
-    pathMatch: 'full',
-    children: [
-      {
-        path: '',
-        component: Analytics,
-        loadChildren: () =>
-          import(
-            './components/analytics/analytics.module'
-          ).then(m => m.AnalyticsModule),
-      },
-    ],
+    loadChildren: () =>
+      import('./components/main/main.module').then(
+        m => m.MainModule
+      ),
   },
 ];
+
+@NgModule({
+  declarations: [],
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
