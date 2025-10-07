@@ -8,15 +8,54 @@
 
   <div class="analytics__config">
     <span>Настройки таблицы</span>
-    <p>Водитель</p>
-    <p>Гос. номер</p>
-    <p>Контрагент</p>
-  </div>
+    <div class="analytics__config--left">
+      <div class="analytics__left">
+        <app-switcher-component
+          [name]="driver.name"
+          [initialActive]="driver.isActive"
+          (stateCheckbox)="stateCheckbox($event)"
+        ></app-switcher-component>
+        <span>Водитель</span>
+      </div>
+      <div class="analytics__left">
+        <app-switcher-component
+          [name]="stateNumber.name"
+          [initialActive]="stateNumber.isActive"
+          (stateCheckbox)="stateCheckbox($event)"
+        ></app-switcher-component>
 
-  <div class="analytics__config">
-    <span>Настройки таблицы</span>
-    <p>Средний расход топлива</p>
-    <p>Время работы</p>
+        <span>Гос. номер</span>
+      </div>
+      <div class="analytics__left">
+        <app-switcher-component
+          [name]="counterparty.name"
+          [initialActive]="counterparty.isActive"
+          (stateCheckbox)="stateCheckbox($event)"
+        ></app-switcher-component>
+
+        <span>Контрагент</span>
+      </div>
+    </div>
+
+    <div class="analytics__config--right">
+      <div class="analytics__right">
+        <app-switcher-component
+          [name]="fuelConsumption.name"
+          [initialActive]="fuelConsumption.isActive"
+          (stateCheckbox)="stateCheckbox($event)"
+        ></app-switcher-component>
+        <span>Средний расход топлива</span>
+      </div>
+
+      <div class="analytics__right">
+        <app-switcher-component
+          [name]="actualWorkTime.name"
+          [initialActive]="actualWorkTime.isActive"
+          (stateCheckbox)="stateCheckbox($event)"
+        ></app-switcher-component>
+        <span>Время работы</span>
+      </div>
+    </div>
   </div>
 
   <div class="analytics__table">

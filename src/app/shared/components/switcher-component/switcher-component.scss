@@ -1,0 +1,49 @@
+@import '../../../scss/variables';
+@import '../../../scss/functions';
+
+.switcher {
+  position: relative;
+
+  & input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    cursor: none;
+    opacity: 0;
+    top: 0px;
+  }
+
+  & label::before {
+    content: '';
+    display: block;
+    border: solid 1px black;
+    height: rem(20);
+    width: rem(40);
+    border-radius: rem(7.5);
+    cursor: pointer;
+  }
+
+  & label::after {
+    content: '';
+    display: block;
+    border: solid 1px $background-switcher;
+    height: rem(16);
+    width: rem(16);
+    border-radius: rem(8);
+    cursor: pointer;
+
+    position: absolute;
+    top: rem(1.8);
+    left: rem(2);
+
+    background-color: $background-switcher;
+    transition: all 1s;
+  }
+
+  & input:checked + label:after {
+    transform: translateX(rem(20));
+    background-color: $background-switcher-active;
+    border-color: $background-switcher-active;
+    transition: all 1s;
+  }
+}

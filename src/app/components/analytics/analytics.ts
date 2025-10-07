@@ -6,6 +6,7 @@ import { KeyTable } from 'src/types/enums/keyMainTable';
 import { TableColumnConfig } from './../../../types/interfaces/tableConfig';
 import { UserTripConfig } from './../../../types/interfaces/userTripConfig';
 import { LIST_MAIN_TABLE } from 'src/app/const';
+import { SwitcherConfig } from 'src/app/shared/components/switcher-component/switcherConfig';
 
 @Component({
   selector: 'app-analytics',
@@ -200,6 +201,31 @@ export class Analytics {
     this.generatorColumnConf('licensePlate'),
   ];
 
+  driver: SwitcherConfig = {
+    name: 'driver',
+    isActive: true,
+  };
+
+  stateNumber: SwitcherConfig = {
+    name: 'stateNumber',
+    isActive: false,
+  };
+
+  counterparty: SwitcherConfig = {
+    name: 'counterparty',
+    isActive: true,
+  };
+
+  fuelConsumption: SwitcherConfig = {
+    name: 'fuelConsumption',
+    isActive: true,
+  };
+
+  actualWorkTime: SwitcherConfig = {
+    name: 'actualWorkTime',
+    isActive: false,
+  };
+
   displayedColumns = Object.keys(KeyTable);
   LIST_MAIN_TABLE: number = LIST_MAIN_TABLE;
 
@@ -217,5 +243,9 @@ export class Analytics {
       pipe: key === 'date' ? 'date' : 'withUnit',
       pipeArg,
     };
+  }
+
+  stateCheckbox(data: SwitcherConfig) {
+    console.log(data);
   }
 }

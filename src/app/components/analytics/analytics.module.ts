@@ -11,6 +11,7 @@ import { Analytics } from './analytics';
 import { CustomPaginatorLocale } from 'src/app/shared/services/custom-paginator-intl.service';
 import { CommonModule } from '@angular/common';
 import { AnalyticsRoutingModule } from './analytics-routing';
+import { SwitcherComponent } from 'src/app/shared/components/switcher-component/switcher-component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { AnalyticsRoutingModule } from './analytics-routing';
     MatButtonModule,
     CommonModule,
     AnalyticsRoutingModule,
+    SwitcherComponent,
   ],
   exports: [Analytics],
   declarations: [Analytics],
