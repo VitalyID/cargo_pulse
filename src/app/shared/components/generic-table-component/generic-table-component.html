@@ -4,20 +4,17 @@
   matSort
   (matSortChange)="announceSortChange($event)"
 >
-  <!-- Header Row -->
   <tr
     mat-header-row
     *matHeaderRowDef="displayedColumns()"
   ></tr>
 
-  <!-- Data Rows -->
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns()"
     (click)="clickedRows(row)"
   ></tr>
 
-  <!-- Column Definitions -->
   @for (column of columns(); track column.key) {
   <ng-container [matColumnDef]="column.key">
     <th
@@ -40,3 +37,13 @@
   </ng-container>
   }
 </table>
+
+<!-- remove pagination if line less than CONST -->
+@if(this.dataSource.paginator &&
+this.dataSource.paginator.length > listPagination()) {
+<mat-paginator
+  [pageSize]="5"
+  [pageSizeOptions]="[5,10,20,31,50]"
+  aria-label="Select page"
+></mat-paginator>
+}

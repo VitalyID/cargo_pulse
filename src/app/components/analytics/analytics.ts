@@ -5,6 +5,7 @@ import {
 import { KeyTable } from 'src/types/enums/keyMainTable';
 import { TableColumnConfig } from './../../../types/interfaces/tableConfig';
 import { UserTripConfig } from './../../../types/interfaces/userTripConfig';
+import { LIST_MAIN_TABLE } from 'src/app/const';
 
 @Component({
   selector: 'app-analytics',
@@ -200,6 +201,7 @@ export class Analytics {
   ];
 
   displayedColumns = Object.keys(KeyTable);
+  LIST_MAIN_TABLE: number = LIST_MAIN_TABLE;
 
   generatorColumnConf(
     key: string,

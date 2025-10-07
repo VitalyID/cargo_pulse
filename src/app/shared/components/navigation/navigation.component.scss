@@ -5,6 +5,7 @@
 .navigation {
   @include flex();
   position: relative;
+  cursor: pointer;
 
   &__icon {
     @include flex();
@@ -13,7 +14,7 @@
     width: rem(25);
     position: relative;
     z-index: 50;
-    background-color: #326b66;
+    background-color: $background-aside-color;
   }
 
   &__title {
@@ -24,7 +25,7 @@
     );
 
     padding-left: 0;
-    background-color: #326b66;
+    background-color: $background-aside-color;
     width: 100%;
     z-index: 40;
   }

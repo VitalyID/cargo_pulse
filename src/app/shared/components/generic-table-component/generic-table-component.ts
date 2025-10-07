@@ -6,10 +6,15 @@ import {
   Component,
   effect,
   inject,
+  Injector,
   input,
+  runInInjectionContext,
   ViewChild,
 } from '@angular/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import {
   MatSort,
   MatSortModule,
@@ -25,6 +30,7 @@ import { UserTripConfig } from 'src/types/interfaces/userTripConfig';
 
 @Component({
   selector: 'app-generic-table-component',
+  standalone: true,
   imports: [
     MatTableModule,
     MatSortModule,
@@ -32,6 +38,7 @@ import { UserTripConfig } from 'src/types/interfaces/userTripConfig';
     WithUnitPipe,
     DatePipe,
   ],
+
   templateUrl: './generic-table-component.html',
   styleUrl: './generic-table-component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,26 +49,27 @@ export class GenericTableComponent
   userTrips = input.required<UserTripConfig[]>();
   columns = input.required<TableColumnConfig[]>();
   displayedColumns = input.required<string[]>();
+  listPagination = input.required<number>();
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
+  readonly #injector = inject(Injector);
 
   readonly dataSource =
     new MatTableDataSource<UserTripConfig>();
 
-  constructor() {
-    // Реагируем на изменение данных
-    effect(() => {
-      this.dataSource.data = this.userTrips();
-    });
-  }
-
   ngAfterViewInit(): void {
-    // Подключаем сортировку после инициализации view
+    runInInjectionContext(this.#injector, () => {
+      effect(() => {
+        this.dataSource.data = this.userTrips();
+        this.dataSource.paginator = this.paginator;
+      });
+    });
+
     this.dataSource.sort = this.sort;
 
-    // Настраиваем кастомную сортировку для специфичных полей
     this.dataSource.sortingDataAccessor = (
       item: UserTripConfig,
       property: string

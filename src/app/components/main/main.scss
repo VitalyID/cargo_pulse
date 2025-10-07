@@ -13,14 +13,15 @@
 header {
   grid-area: header;
   height: rem(75);
-  background-color: #753a3a;
+  background-color: $background-header-color;
 }
 
 aside {
   grid-area: aside;
 
-  background-color: #96da5e;
+  background-color: $background-aside-color;
   position: relative;
+  border-top: solid 2px black;
 
   .icon-close {
     display: none;
@@ -31,7 +32,10 @@ main {
   grid-area: main;
   padding: var(--spacing-xl);
 
-  background-color: $backgroundColor-main;
+  background-color: $background-main-color;
+  border-top: solid 2px black;
+  border-left: solid 1px black;
+
   min-height: 100vh;
 }
 
