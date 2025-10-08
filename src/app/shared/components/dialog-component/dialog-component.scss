@@ -1,0 +1,14 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+.dialog {
+  padding: $spacing-md;
+
+  &__props {
+    width: fit-content;
+  }
+
+  &__button {
+    @include flex($justify: end);
+  }
+}

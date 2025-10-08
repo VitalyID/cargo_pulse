@@ -1,0 +1,39 @@
+@import '../../../scss/mixins';
+@import '../../../scss/functions';
+@import '../../../scss/variables';
+
+.config {
+  @include flex($gap: 20px);
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: $spacing-md;
+  position: relative;
+  margin-bottom: $spacing-md;
+  width: max-content;
+  min-width: fit-content;
+
+  & > span:first-child {
+    position: absolute;
+    top: rem(-20);
+    left: rem(15);
+    background-color: $background-main-color;
+    padding: $spacing-sm;
+  }
+
+  &__left,
+  &__right {
+    @include flex($direction: column, $alight: start);
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+
+  &__switcher {
+    @include flex($gap: 30px);
+    padding: $spacing-sm;
+
+    & span {
+      margin-bottom: 0;
+      width: rem(140);
+    }
+  }
+}
