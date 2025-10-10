@@ -1,3 +1,9 @@
+import {
+  Organization,
+  PersonalPartner,
+  SoleProprietor,
+} from './partner';
+
 export interface UserTripConfig {
   id: string;
   date: string;
@@ -14,4 +20,8 @@ export interface UserTripConfig {
   revenue: number;
   margin: number;
   marginality: number;
+  counterparty:
+    | PersonalPartner
+    | Organization
+    | SoleProprietor;
 }

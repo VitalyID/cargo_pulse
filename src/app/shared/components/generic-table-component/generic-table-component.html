@@ -39,8 +39,7 @@
 </table>
 
 <!-- remove pagination if line less than CONST -->
-@if(this.dataSource.paginator &&
-this.dataSource.paginator.length > listPagination()) {
+@if( isPaginator()) {
 <mat-paginator
   [pageSize]="5"
   [pageSizeOptions]="[5,10,20,31,50]"

@@ -9,8 +9,16 @@ import { UserTripConfig } from 'src/types/interfaces/userTripConfig';
 export class ApiService {
   readonly #http = inject(HttpClient);
 
-  readonly #url = '../../../../mock/user_trips.json';
-  getData(): Observable<UserTripConfig[]> {
+  readonly #url = 'assets/mock/user_trips.json';
+  getAllTrip(): Observable<UserTripConfig[]> {
     return this.#http.get<UserTripConfig[]>(this.#url);
+  }
+
+  getAllTrips() {
+    console.log(1111);
+
+    const data = this.getAllTrip();
+    console.log('данные с сервера:', data);
+    return data;
   }
 }

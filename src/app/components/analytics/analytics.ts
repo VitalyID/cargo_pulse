@@ -1,12 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
+  OnInit,
+  Signal,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { LIST_MAIN_TABLE } from 'src/app/const';
+import { SwitcherConfig } from 'src/app/shared/components/switcher-component/switcherConfig';
+import { selectUserTrips } from 'src/app/states/userTrips/user-tips.selectors';
 import { KeyTable } from 'src/types/enums/keyMainTable';
 import { TableColumnConfig } from './../../../types/interfaces/tableConfig';
 import { UserTripConfig } from './../../../types/interfaces/userTripConfig';
-import { LIST_MAIN_TABLE } from 'src/app/const';
-import { SwitcherConfig } from 'src/app/shared/components/switcher-component/switcherConfig';
+import * as UserTripsActions from '../../states/userTrips/user-trips.action';
 
 @Component({
   selector: 'app-analytics',
@@ -15,174 +21,11 @@ import { SwitcherConfig } from 'src/app/shared/components/switcher-component/swi
   styleUrl: './analytics.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Analytics {
-  userTripData: UserTripConfig[] = [
-    {
-      id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      date: '2024-01-15T00:00:00.000Z',
-      mileage: 245,
-      driver: 'Иванов А.С.',
-      licensePlate: 'А123ВС777',
-      actualWorkTime: 420,
-      fuelConsumption: 28.7,
-      fuelCost: 2150,
-      primeCost: 8500,
-      taxCost: 1200,
-      officeCost: 1500,
-      otherCost: 800,
-      revenue: 15000,
-      margin: 6500,
-      marginality: 43.3,
-    },
-    {
-      id: 'b2c3d4e5-f6g7-8901-bcde-f23456789012',
-      date: '2024-01-16T00:00:00.000Z',
-      mileage: 180,
-      driver: 'Петров В.И.',
-      licensePlate: 'О456ТУ777',
-      actualWorkTime: 380,
-      fuelConsumption: 21.6,
-      fuelCost: 1620,
-      primeCost: 7200,
-      officeCost: 1400,
-      otherCost: 600,
-      revenue: 12500,
-      margin: 5300,
-      marginality: 42.4,
-    },
-    {
-      id: 'c3d4e5f6-g7h8-9012-cdef-345678901234',
-      date: '2024-01-17T00:00:00.000Z',
-      mileage: 320,
-      driver: 'Сидоров М.П.',
-      licensePlate: 'У789ХК777',
-      actualWorkTime: 510,
-      fuelConsumption: 38.4,
-      fuelCost: 2880,
-      primeCost: 11200,
-      taxCost: 1800,
-      officeCost: 1800,
-      otherCost: 1200,
-      revenue: 21000,
-      margin: 9800,
-      marginality: 46.7,
-    },
-    {
-      id: 'd4e5f6g7-h8i9-0123-defg-456789012345',
-      date: '2024-01-18T00:00:00.000Z',
-      mileage: 150,
-      driver: 'Козлов Д.В.',
-      licensePlate: 'В321АМ777',
-      actualWorkTime: 290,
-      fuelConsumption: 18.0,
-      fuelCost: 1350,
-      primeCost: 5800,
-      officeCost: 1200,
-      otherCost: 450,
-      revenue: 9800,
-      margin: 4000,
-      marginality: 40.8,
-    },
-    {
-      id: 'e5f6g7h8-i9j0-1234-efgh-567890123456',
-      date: '2024-01-19T00:00:00.000Z',
-      mileage: 275,
-      driver: 'Никитин С.К.',
-      licensePlate: 'Е654НР777',
-      actualWorkTime: 460,
-      fuelConsumption: 33.0,
-      fuelCost: 2475,
-      primeCost: 9500,
-      taxCost: 1400,
-      officeCost: 1600,
-      otherCost: 950,
-      revenue: 16800,
-      margin: 7300,
-      marginality: 43.5,
-    },
-    {
-      id: 'f6g7h8i9-j0k1-2345-fghi-678901234567',
-      date: '2024-01-20T00:00:00.000Z',
-      mileage: 195,
-      driver: 'Федоров П.М.',
-      licensePlate: 'Р987СТ777',
-      actualWorkTime: 350,
-      fuelConsumption: 23.4,
-      fuelCost: 1755,
-      primeCost: 6800,
-      officeCost: 1300,
-      otherCost: 550,
-      revenue: 11500,
-      margin: 4700,
-      marginality: 40.9,
-    },
-    {
-      id: 'g7h8i9j0-k1l2-3456-ghij-789012345678',
-      date: '2024-01-21T00:00:00.000Z',
-      mileage: 420,
-      driver: 'Морозов А.В.',
-      licensePlate: 'Х159ОА777',
-      actualWorkTime: 620,
-      fuelConsumption: 50.4,
-      fuelCost: 3780,
-      primeCost: 14500,
-      taxCost: 2200,
-      officeCost: 2100,
-      otherCost: 1800,
-      revenue: 28500,
-      margin: 14000,
-      marginality: 49.1,
-    },
-    {
-      id: 'h8i9j0k1-l2m3-4567-hijk-890123456789',
-      date: '2024-01-22T00:00:00.000Z',
-      mileage: 165,
-      driver: 'Волков И.С.',
-      licensePlate: 'К753ВУ777',
-      actualWorkTime: 310,
-      fuelConsumption: 19.8,
-      fuelCost: 1485,
-      primeCost: 6200,
-      officeCost: 1250,
-      otherCost: 500,
-      revenue: 10500,
-      margin: 4300,
-      marginality: 41.0,
-    },
-    {
-      id: 'i9j0k1l2-m3n4-5678-ijkl-901234567890',
-      date: '2024-01-23T00:00:00.000Z',
-      mileage: 290,
-      driver: 'Лебедев Н.А.',
-      licensePlate: 'М426ЕР777',
-      actualWorkTime: 480,
-      fuelConsumption: 34.8,
-      fuelCost: 2610,
-      primeCost: 10200,
-      taxCost: 1600,
-      officeCost: 1700,
-      otherCost: 1100,
-      revenue: 19200,
-      margin: 9000,
-      marginality: 46.9,
-    },
-    {
-      id: 'j0k1l2m3-n4o5-6789-jklm-012345678901',
-      date: '2024-01-24T00:00:00.000Z',
-      mileage: 230,
-      driver: 'Соловьев Д.К.',
-      licensePlate: 'Т582РА777',
-      actualWorkTime: 400,
-      fuelConsumption: 27.6,
-      fuelCost: 2070,
-      primeCost: 7800,
-      officeCost: 1450,
-      otherCost: 700,
-      revenue: 13800,
-      margin: 6000,
-      marginality: 43.5,
-    },
-  ];
+export class Analytics implements OnInit {
+  readonly #store = inject(Store);
+
+  userTripData: Signal<UserTripConfig[]> =
+    this.#store.selectSignal(selectUserTrips);
 
   columns: TableColumnConfig[] = [
     this.generatorColumnConf('date', 'dd.MM.yyyy'),
@@ -199,6 +42,7 @@ export class Analytics {
     this.generatorColumnConf('marginality', '%'),
     this.generatorColumnConf('driver'),
     this.generatorColumnConf('licensePlate'),
+    this.generatorColumnConf('counterparty'),
   ];
 
   driver: SwitcherConfig = {
@@ -228,6 +72,10 @@ export class Analytics {
 
   displayedColumns = Object.keys(KeyTable);
   LIST_MAIN_TABLE: number = LIST_MAIN_TABLE;
+
+  ngOnInit(): void {
+    this.#store.dispatch(UserTripsActions.loadUserTrips());
+  }
 
   generatorColumnConf(
     key: string,

@@ -7,7 +7,7 @@ export interface Partner {
 }
 
 export interface PersonalPartner {
-  type: TypeClients.PersonalPartner;
+  type: 'PersonalPartner';
   name: string;
   lastName: string;
   surname: string;
@@ -15,7 +15,7 @@ export interface PersonalPartner {
 }
 
 export interface SoleProprietor {
-  type: TypeClients.SoleProprietor;
+  type: 'SoleProprietor';
   personalInfo: PersonalConfig;
   taxId: string;
   ogrnip: string;
@@ -26,7 +26,7 @@ export interface SoleProprietor {
 }
 
 export interface Organization {
-  type: TypeClients.Organization;
+  type: 'Organization';
   title: string;
   officialAddress: AddressConfig;
   postAddress: AddressConfig;

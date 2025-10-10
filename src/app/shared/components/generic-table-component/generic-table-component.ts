@@ -4,11 +4,15 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   inject,
   Injector,
   input,
+  OnChanges,
   runInInjectionContext,
+  Signal,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import {
@@ -27,6 +31,7 @@ import {
 import { WithUnitPipe } from 'src/app/pipes/unit.pipe';
 import { TableColumnConfig } from 'src/types/interfaces/tableConfig';
 import { UserTripConfig } from 'src/types/interfaces/userTripConfig';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-generic-table-component',
@@ -51,6 +56,11 @@ export class GenericTableComponent
   displayedColumns = input.required<string[]>();
   listPagination = input.required<number>();
 
+  // isPaginator = signal<boolean>(false);
+  isPaginator = computed(
+    () => this.userTrips().length > this.listPagination()
+  );
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -64,11 +74,19 @@ export class GenericTableComponent
     runInInjectionContext(this.#injector, () => {
       effect(() => {
         this.dataSource.data = this.userTrips();
-        this.dataSource.paginator = this.paginator;
+
+        if (this.isPaginator() && this.paginator) {
+          this.dataSource.paginator = this.paginator;
+        } else {
+          this.dataSource.paginator = null;
+        }
+
+        // Сортировка всегда должна быть связана
+        if (this.sort) {
+          this.dataSource.sort = this.sort;
+        }
       });
     });
-
-    this.dataSource.sort = this.sort;
 
     this.dataSource.sortingDataAccessor = (
       item: UserTripConfig,
