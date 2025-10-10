@@ -9,10 +9,8 @@ import {
   inject,
   Injector,
   input,
-  OnChanges,
   runInInjectionContext,
-  Signal,
-  SimpleChanges,
+  viewChild,
   ViewChild,
 } from '@angular/core';
 import {
@@ -31,7 +29,6 @@ import {
 import { WithUnitPipe } from 'src/app/pipes/unit.pipe';
 import { TableColumnConfig } from 'src/types/interfaces/tableConfig';
 import { UserTripConfig } from 'src/types/interfaces/userTripConfig';
-import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-generic-table-component',
@@ -61,8 +58,8 @@ export class GenericTableComponent
     () => this.userTrips().length > this.listPagination()
   );
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  sort = viewChild.required(MatSort);
+  paginator = viewChild(MatPaginator);
 
   private readonly _liveAnnouncer = inject(LiveAnnouncer);
   readonly #injector = inject(Injector);
@@ -74,17 +71,8 @@ export class GenericTableComponent
     runInInjectionContext(this.#injector, () => {
       effect(() => {
         this.dataSource.data = this.userTrips();
-
-        if (this.isPaginator() && this.paginator) {
-          this.dataSource.paginator = this.paginator;
-        } else {
-          this.dataSource.paginator = null;
-        }
-
-        // Сортировка всегда должна быть связана
-        if (this.sort) {
-          this.dataSource.sort = this.sort;
-        }
+        this.dataSource.paginator = this.paginator();
+        this.dataSource.sort = this.sort();
       });
     });
 
