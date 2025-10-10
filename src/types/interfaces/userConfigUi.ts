@@ -1,5 +1,5 @@
 export interface UserConfigUi {
-  id: boolean;
+  id: string;
   date: boolean;
   mileage: boolean;
   driver: boolean;
