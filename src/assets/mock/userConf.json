@@ -1,0 +1,20 @@
+{
+  "table": {
+    "date": true,
+    "mileage": true,
+    "driver": true,
+    "licensePlate": true,
+    "actualWorkTime": true,
+    "fuelConsumption": true,
+    "fuelCost": false,
+    "primeCost": true,
+    "taxCost": false,
+    "officeCost": false,
+    "otherCost": false,
+    "revenue": true,
+    "margin": true,
+    "marginality": false,
+    "counterparty": true
+  }
+}
+

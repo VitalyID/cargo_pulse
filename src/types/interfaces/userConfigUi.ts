@@ -1,5 +1,8 @@
 export interface UserConfigUi {
-  id: string;
+  table: TableConf;
+}
+
+export interface TableConf {
   date: boolean;
   mileage: boolean;
   driver: boolean;

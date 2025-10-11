@@ -13,6 +13,12 @@ import { KeyTable } from 'src/types/enums/keyMainTable';
 import { TableColumnConfig } from './../../../types/interfaces/tableConfig';
 import { UserTripConfig } from './../../../types/interfaces/userTripConfig';
 import * as UserTripsActions from '../../states/userTrips/user-trips.action';
+import * as UserConfActions from '../../states/userConfig/user-config.action';
+import { selectUserConf } from 'src/app/states/userConfig/user-config.selectors';
+import {
+  TableConf,
+  UserConfigUi,
+} from 'src/types/interfaces/userConfigUi';
 
 @Component({
   selector: 'app-analytics',
@@ -73,8 +79,12 @@ export class Analytics implements OnInit {
   displayedColumns = Object.keys(KeyTable);
   LIST_MAIN_TABLE: number = LIST_MAIN_TABLE;
 
+  data: Signal<UserConfigUi> =
+    this.#store.selectSignal(selectUserConf);
+
   ngOnInit(): void {
     this.#store.dispatch(UserTripsActions.loadUserTrips());
+    this.#store.dispatch(UserConfActions.loadTableConfig());
   }
 
   generatorColumnConf(

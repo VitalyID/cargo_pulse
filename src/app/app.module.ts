@@ -1,3 +1,4 @@
+import { ListStores } from './const';
 import {
   HttpClient,
   provideHttpClient,
@@ -13,7 +14,13 @@ import { StoreModule } from '@ngrx/store';
 import { App } from './app';
 import { AppRoutingModule, routes } from './app.routes';
 import { UserTripsEffects } from './states/userTrips/user-trip.effects';
-import { userTripsReducer } from './states/userTrips/user-trips.reducer';
+import {
+  userTripsReducer,
+  TripState,
+} from './states/userTrips/user-trips.reducer';
+import { AppState } from './app.state';
+import { UserConfigUiEffects } from './states/userConfig/user-config.effects';
+import { UserConfUiReducer } from './states/userConfig/user-config.reducer';
 
 @NgModule({
   imports: [
@@ -21,8 +28,11 @@ import { userTripsReducer } from './states/userTrips/user-trips.reducer';
     BrowserModule,
     RouterModule.forRoot(routes),
     AppRoutingModule,
-    StoreModule.forRoot({ userTripsKey: userTripsReducer }),
-    EffectsModule.forRoot([UserTripsEffects]),
+    StoreModule.forRoot<AppState>(ListStores),
+    EffectsModule.forRoot([
+      UserTripsEffects,
+      UserConfigUiEffects,
+    ]),
   ],
   exports: [App],
   declarations: [App],
