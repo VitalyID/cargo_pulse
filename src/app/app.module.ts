@@ -1,8 +1,4 @@
-import { ListStores } from './const';
-import {
-  HttpClient,
-  provideHttpClient,
-} from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {
@@ -13,14 +9,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { App } from './app';
 import { AppRoutingModule, routes } from './app.routes';
-import { UserTripsEffects } from './states/userTrips/user-trip.effects';
-import {
-  userTripsReducer,
-  TripState,
-} from './states/userTrips/user-trips.reducer';
 import { AppState } from './app.state';
+import { ListStores } from './const';
 import { UserConfigUiEffects } from './states/userConfig/user-config.effects';
-import { UserConfUiReducer } from './states/userConfig/user-config.reducer';
+import { UserTripsEffects } from './states/userTrips/user-trip.effects';
 
 @NgModule({
   imports: [
