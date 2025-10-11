@@ -1,10 +1,5 @@
-import { TypeClients } from '../enums/typeCliets';
 import { AddressConfig } from './address-config';
 import { PersonalConfig } from './personal-config';
-
-export interface Partner {
-  type: PersonalPartner | SoleProprietor | Organization;
-}
 
 export interface PersonalPartner {
   type: 'PersonalPartner';

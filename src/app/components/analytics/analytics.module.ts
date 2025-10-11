@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -7,11 +8,11 @@ import {
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { GenericTableComponent } from 'src/app/shared/components/generic-table-component/generic-table-component';
-import { Analytics } from './analytics';
 import { CustomPaginatorLocale } from 'src/app/shared/services/custom-paginator-intl.service';
-import { CommonModule } from '@angular/common';
+import { Analytics } from './analytics';
 import { AnalyticsRoutingModule } from './analytics-routing';
-import { SwitcherComponent } from 'src/app/shared/components/switcher-component/switcher-component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared/components/dialog-component/dialog-component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SwitcherComponent } from 'src/app/shared/components/switcher-component/
     MatButtonModule,
     CommonModule,
     AnalyticsRoutingModule,
-    SwitcherComponent,
+    MatDialogModule,
+    DialogComponent,
   ],
   exports: [Analytics],
   declarations: [Analytics],

@@ -3,60 +3,15 @@
     <div class="analytics__title">
       <h2>Аналитическа информация</h2>
     </div>
-    <button matButton="outlined">Настройки раздела</button>
+    <button
+      matButton="outlined"
+      (click)="openDialog()"
+    >
+      Настройки раздела
+    </button>
   </div>
 
-  <div class="analytics__config">
-    <!-- <span>Настройки таблицы</span>
-    <div class="analytics__config--left">
-      <div class="analytics__left">
-        <app-switcher-component
-          [name]="driver.name"
-          [initialActive]="driver.isActive"
-          (stateCheckbox)="stateCheckbox($event)"
-        ></app-switcher-component>
-        <span>Водитель</span>
-      </div>
-      <div class="analytics__left">
-        <app-switcher-component
-          [name]="stateNumber.name"
-          [initialActive]="stateNumber.isActive"
-          (stateCheckbox)="stateCheckbox($event)"
-        ></app-switcher-component>
-
-        <span>Гос. номер</span>
-      </div>
-      <div class="analytics__left">
-        <app-switcher-component
-          [name]="counterparty.name"
-          [initialActive]="counterparty.isActive"
-          (stateCheckbox)="stateCheckbox($event)"
-        ></app-switcher-component>
-
-        <span>Контрагент</span>
-      </div>
-    </div>
-
-    <div class="analytics__config--right">
-      <div class="analytics__right">
-        <app-switcher-component
-          [name]="fuelConsumption.name"
-          [initialActive]="fuelConsumption.isActive"
-          (stateCheckbox)="stateCheckbox($event)"
-        ></app-switcher-component>
-        <span>Средний расход топлива</span>
-      </div>
-
-      <div class="analytics__right">
-        <app-switcher-component
-          [name]="actualWorkTime.name"
-          [initialActive]="actualWorkTime.isActive"
-          (stateCheckbox)="stateCheckbox($event)"
-        ></app-switcher-component>
-        <span>Время работы</span>
-      </div>
-    </div> -->
-  </div>
+  <!-- <app-table-setting-dialog-component></app-table-setting-dialog-component> -->
 
   <div class="analytics__table">
     <app-generic-table-component
