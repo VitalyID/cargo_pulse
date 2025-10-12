@@ -20,26 +20,32 @@ import { KeyTable } from 'src/types/enums/keyMainTable';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSettingDialogComponent {
-  inputs = input<UserConfigUi>();
+  userConf = input<UserConfigUi>();
 
   listSwitchers = computed(() => {
-    const inputsValue = this.inputs();
+    const inputsValue = this.userConf()?.table;
 
     return LIST_SWITCHERS.map(switcher => {
       return {
         name: switcher,
         isActive: inputsValue
-          ? (inputsValue.table[switcher] ?? false)
+          ? (inputsValue[switcher] ?? false)
           : false,
       };
     });
   });
 
-  columnSwitchers1 = this.listSwitchers().slice(0, 5);
-  columnSwitchers2 = this.listSwitchers().slice(5, 10);
-  columnSwitchers3 = this.listSwitchers().slice(
-    10,
-    this.listSwitchers().length
+  columnSwitchers1 = computed(() =>
+    this.listSwitchers().slice(0, 5)
+  );
+  columnSwitchers2 = computed(() =>
+    this.listSwitchers().slice(5, 10)
+  );
+  columnSwitchers3 = computed(() =>
+    this.listSwitchers().slice(
+      10,
+      this.listSwitchers().length
+    )
   );
 
   convertName(name: string): string {

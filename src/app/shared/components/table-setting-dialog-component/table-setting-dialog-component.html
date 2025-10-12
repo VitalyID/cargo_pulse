@@ -1,32 +1,40 @@
 <div class="config">
   <div class="config__cards">
     <div class="config__section">
-      @for (switcher of columnSwitchers1; track
+      @for (switcher of columnSwitchers1(); track
       switcher.name){
       <div class="config__switcher">
-        <app-switcher-component></app-switcher-component>
+        <app-switcher-component
+          [name]="switcher.name"
+          [initialActive]="switcher.isActive"
+        ></app-switcher-component>
         <span>{{convertName (switcher.name)}}</span>
       </div>
       }
     </div>
     <div class="config__section">
-      @for (switcher of columnSwitchers2; track
+      @for (switcher of columnSwitchers2(); track
       switcher.name){
       <div class="config__switcher">
-        <app-switcher-component></app-switcher-component>
+        <app-switcher-component
+          [name]="switcher.name"
+          [initialActive]="switcher.isActive"
+        ></app-switcher-component>
         <span>{{convertName (switcher.name)}}</span>
       </div>
       }
     </div>
     <div class="config__section">
-      @for (switcher of columnSwitchers3; track
+      @for (switcher of columnSwitchers3(); track
       switcher.name){
       <div class="config__switcher">
-        <app-switcher-component></app-switcher-component>
+        <app-switcher-component
+          [name]="switcher.name"
+          [initialActive]="switcher.isActive"
+        ></app-switcher-component>
         <span>{{convertName (switcher.name)}}</span>
       </div>
       }
     </div>
   </div>
-  {{inputs()?.table | json}}
 </div>
