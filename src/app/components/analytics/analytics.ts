@@ -88,26 +88,26 @@ export class Analytics implements OnInit {
   //   },
   // ];
 
-  driver: SwitcherConfig = {
-    name: 'driver',
-    isActive: false,
-  };
-  stateNumber: SwitcherConfig = {
-    name: 'stateNumber',
-    isActive: false,
-  };
-  counterparty: SwitcherConfig = {
-    name: 'counterparty',
-    isActive: true,
-  };
-  fuelConsumption: SwitcherConfig = {
-    name: 'fuelConsumption',
-    isActive: true,
-  };
-  actualWorkTime: SwitcherConfig = {
-    name: '',
-    isActive: false,
-  };
+  // driver: SwitcherConfig = {
+  //   name: 'driver',
+  //   isActive: false,
+  // };
+  // stateNumber: SwitcherConfig = {
+  //   name: 'stateNumber',
+  //   isActive: false,
+  // };
+  // counterparty: SwitcherConfig = {
+  //   name: 'counterparty',
+  //   isActive: true,
+  // };
+  // fuelConsumption: SwitcherConfig = {
+  //   name: 'fuelConsumption',
+  //   isActive: true,
+  // };
+  // actualWorkTime: SwitcherConfig = {
+  //   name: '',
+  //   isActive: false,
+  // };
 
   columns: TableColumnConfig[] = [
     this.generatorColumnConf('date', 'dd.MM.yyyy'),

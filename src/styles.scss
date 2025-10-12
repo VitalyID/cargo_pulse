@@ -53,6 +53,7 @@ body {
   --asideWidth: #{rem(250)};
   --asideLogoWidth: #{rem(24)};
   --asideLogoHeight: #{rem(24)};
+  --mat-dialog-container-max-width: #{$mat-dialog-max-width};
 }
 
 @media (max-width: 1200px) {

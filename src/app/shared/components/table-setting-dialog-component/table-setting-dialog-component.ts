@@ -1,69 +1,49 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Inject,
-  Input,
-  OnInit,
-  Output,
+  computed,
+  input,
 } from '@angular/core';
-import { SettingAnalytics } from 'src/types/interfaces/dialogConfig';
+import { LIST_SWITCHERS } from 'src/app/const';
+import { UserConfigUi } from 'src/types/interfaces/userConfigUi';
+import { CardComponent } from '../card/card-component';
 import { SwitcherComponent } from '../switcher-component/switcher-component';
-import { SwitcherConfig } from '../switcher-component/switcherConfig';
-import { inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { KeyTable } from 'src/types/enums/keyMainTable';
 
 @Component({
   selector: 'app-table-setting-dialog-component',
   standalone: true,
-  imports: [SwitcherComponent],
+  imports: [CardComponent, CommonModule, SwitcherComponent],
   templateUrl: './table-setting-dialog-component.html',
   styleUrl: './table-setting-dialog-component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSettingDialogComponent {
-  @Input() driver: SwitcherConfig = {
-    name: '',
-    isActive: false,
-  };
-  @Input() stateNumber: SwitcherConfig = {
-    name: '',
-    isActive: false,
-  };
-  @Input() counterparty: SwitcherConfig = {
-    name: '',
-    isActive: false,
-  };
-  @Input() fuelConsumption: SwitcherConfig = {
-    name: '',
-    isActive: false,
-  };
-  @Input() actualWorkTime: SwitcherConfig = {
-    name: '',
-    isActive: false,
-  };
-  @Output() modalConfig =
-    new EventEmitter<SettingAnalytics>();
+  inputs = input<UserConfigUi>();
 
-  switchers: SwitcherConfig[] = [
-    this.driver,
-    this.stateNumber,
-    this.counterparty,
-    this.fuelConsumption,
-    this.actualWorkTime,
-  ];
+  listSwitchers = computed(() => {
+    const inputsValue = this.inputs();
 
-  updateSwitcher(data: SwitcherConfig): SwitcherConfig[] {
-    return this.switchers.map(switcher => {
-      if (switcher.name === data.name) {
-        return { ...switcher, isActive: data.isActive };
-      }
-      return switcher;
+    return LIST_SWITCHERS.map(switcher => {
+      return {
+        name: switcher,
+        isActive: inputsValue
+          ? (inputsValue.table[switcher] ?? false)
+          : false,
+      };
     });
-  }
+  });
 
-  stateCheckbox(data: SwitcherConfig) {
-    this.updateSwitcher(data);
-    this.modalConfig.emit({ checkboxes: this.switchers });
+  columnSwitchers1 = this.listSwitchers().slice(0, 5);
+  columnSwitchers2 = this.listSwitchers().slice(5, 10);
+  columnSwitchers3 = this.listSwitchers().slice(
+    10,
+    this.listSwitchers().length
+  );
+
+  convertName(name: string): string {
+    const key = name as keyof typeof KeyTable;
+    return KeyTable[key];
   }
 }

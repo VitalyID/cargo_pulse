@@ -5,8 +5,13 @@ export enum KeyTable {
   licensePlate = 'Г/н',
   actualWorkTime = 'Время работы',
   fuelConsumption = 'Расход',
+  fuelCost = 'Затраты на топливо',
   primeCost = 'Себестоимость',
+  taxCost = 'Налоговая нагрузка',
+  officeCost = 'Офис и сопутствующее',
+  otherCost = 'Прочие расходы',
   revenue = 'Выручка',
   margin = 'Маржа',
   marginality = 'Маржинальность',
+  counterparty = 'Контрагент',
 }

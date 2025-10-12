@@ -8,3 +8,21 @@ export const ListStores = {
   userTripsKey: userTripsReducer,
   userConfKey: UserConfUiReducer,
 };
+
+export const LIST_SWITCHERS = [
+  'date',
+  'mileage',
+  'driver',
+  'licensePlate',
+  'actualWorkTime',
+  'fuelConsumption',
+  'fuelCost',
+  'primeCost',
+  'taxCost',
+  'officeCost',
+  'otherCost',
+  'revenue',
+  'margin',
+  'marginality',
+  'counterparty',
+] as const;

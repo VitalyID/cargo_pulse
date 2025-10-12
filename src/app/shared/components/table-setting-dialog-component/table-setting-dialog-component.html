@@ -1,51 +1,32 @@
 <div class="config">
-  <span>Настройки таблицы</span>
-  <div class="config__left">
-    <div class="config__switcher">
-      <app-switcher-component
-        [name]="driver.name"
-        [initialActive]="driver.isActive"
-        (stateCheckbox)="stateCheckbox($event)"
-      ></app-switcher-component>
-      <span>Водитель</span>
+  <div class="config__cards">
+    <div class="config__section">
+      @for (switcher of columnSwitchers1; track
+      switcher.name){
+      <div class="config__switcher">
+        <app-switcher-component></app-switcher-component>
+        <span>{{convertName (switcher.name)}}</span>
+      </div>
+      }
     </div>
-    <div class="config__switcher">
-      <app-switcher-component
-        [name]="stateNumber.name"
-        [initialActive]="stateNumber.isActive"
-        (stateCheckbox)="stateCheckbox($event)"
-      ></app-switcher-component>
-
-      <span>Гос. номер</span>
+    <div class="config__section">
+      @for (switcher of columnSwitchers2; track
+      switcher.name){
+      <div class="config__switcher">
+        <app-switcher-component></app-switcher-component>
+        <span>{{convertName (switcher.name)}}</span>
+      </div>
+      }
     </div>
-    <div class="config__switcher">
-      <app-switcher-component
-        [name]="counterparty.name"
-        [initialActive]="counterparty.isActive"
-        (stateCheckbox)="stateCheckbox($event)"
-      ></app-switcher-component>
-
-      <span>Контрагент</span>
-    </div>
-  </div>
-
-  <div class="config__right">
-    <div class="config__switcher">
-      <app-switcher-component
-        [name]="fuelConsumption.name"
-        [initialActive]="fuelConsumption.isActive"
-        (stateCheckbox)="stateCheckbox($event)"
-      ></app-switcher-component>
-      <span>Средний расход топлива</span>
-    </div>
-
-    <div class="config__switcher">
-      <app-switcher-component
-        [name]="actualWorkTime.name"
-        [initialActive]="actualWorkTime.isActive"
-        (stateCheckbox)="stateCheckbox($event)"
-      ></app-switcher-component>
-      <span>Время работы</span>
+    <div class="config__section">
+      @for (switcher of columnSwitchers3; track
+      switcher.name){
+      <div class="config__switcher">
+        <app-switcher-component></app-switcher-component>
+        <span>{{convertName (switcher.name)}}</span>
+      </div>
+      }
     </div>
   </div>
+  {{inputs()?.table | json}}
 </div>

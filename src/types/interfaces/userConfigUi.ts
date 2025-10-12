@@ -1,5 +1,6 @@
 export interface UserConfigUi {
   table: TableConf;
+  [key: string]: unknown;
 }
 
 export interface TableConf {

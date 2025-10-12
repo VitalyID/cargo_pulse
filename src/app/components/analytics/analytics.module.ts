@@ -13,6 +13,7 @@ import { Analytics } from './analytics';
 import { AnalyticsRoutingModule } from './analytics-routing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog-component/dialog-component';
+import { TableSettingDialogComponent } from 'src/app/shared/components/table-setting-dialog-component/table-setting-dialog-component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { DialogComponent } from 'src/app/shared/components/dialog-component/dial
     AnalyticsRoutingModule,
     MatDialogModule,
     DialogComponent,
+    TableSettingDialogComponent,
   ],
   exports: [Analytics],
   declarations: [Analytics],

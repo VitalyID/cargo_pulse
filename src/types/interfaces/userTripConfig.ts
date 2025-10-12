@@ -22,11 +22,6 @@ export interface UserTripConfig {
   marginality: number;
   counterparty:
     | PersonalPartner
-<<<<<<< Updated upstream
     | Organization
     | SoleProprietor;
-=======
-    | SoleProprietor
-    | Organization;
->>>>>>> Stashed changes
 }
