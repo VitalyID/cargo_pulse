@@ -11,7 +11,10 @@ import { GenericTableComponent } from 'src/app/shared/components/generic-table-c
 import { CustomPaginatorLocale } from 'src/app/shared/services/custom-paginator-intl.service';
 import { Analytics } from './analytics';
 import { AnalyticsRoutingModule } from './analytics-routing';
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialogClose,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog-component/dialog-component';
 import { TableSettingDialogComponent } from 'src/app/shared/components/table-setting-dialog-component/table-setting-dialog-component';
 
@@ -20,6 +23,7 @@ import { TableSettingDialogComponent } from 'src/app/shared/components/table-set
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDialogClose,
     GenericTableComponent,
     MatButtonModule,
     CommonModule,

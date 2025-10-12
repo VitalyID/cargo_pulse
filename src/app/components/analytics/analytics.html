@@ -5,7 +5,8 @@
     </div>
     <button
       matButton="outlined"
-      (click)="openDialog()"
+      cdkFocusInitial
+      (click)="openDialog('500ms','300ms')"
     >
       Настройки раздела
     </button>
