@@ -39,6 +39,8 @@ export class Analytics implements OnInit {
 
   userTripData: Signal<UserTripConfig[]> =
     this.#store.selectSignal(selectUserTrips);
+  data: Signal<UserConfigUi> =
+    this.#store.selectSignal(selectUserConf);
 
   columns: TableColumnConfig[] = [
     this.generatorColumnConf('date', 'dd.MM.yyyy'),
@@ -55,7 +57,59 @@ export class Analytics implements OnInit {
     this.generatorColumnConf('marginality', '%'),
     this.generatorColumnConf('driver'),
     this.generatorColumnConf('licensePlate'),
-    this.generatorColumnConf('counterparty'),
+    this.generatorColumnConf('counterpart_type'),
+    this.generatorColumnConf('counterpart_name'),
+    this.generatorColumnConf('counterpart_lastName'),
+    this.generatorColumnConf('counterpart_surname'),
+    this.generatorColumnConf('counterpart_tel'),
+    this.generatorColumnConf('counterpart_title'),
+    this.generatorColumnConf('counterpart_taxID'),
+    this.generatorColumnConf('counterpart_kpp'),
+    this.generatorColumnConf('counterpart_currentAcc'),
+    this.generatorColumnConf('counterpart_bank'),
+    this.generatorColumnConf(
+      'counterpart_correspondentAcc'
+    ),
+    this.generatorColumnConf('counterpart_bik'),
+    this.generatorColumnConf('counterpart_ogrn_ogrnip'),
+    this.generatorColumnConf('counterpart_director'),
+    this.generatorColumnConf('counterpart_directorInShort'),
+    this.generatorColumnConf(
+      'counterpart_officialAddress_country'
+    ),
+    this.generatorColumnConf(
+      'counterpart_officialAddress_region'
+    ),
+    this.generatorColumnConf(
+      'counterpart_officialAddress_city'
+    ),
+    this.generatorColumnConf(
+      'counterpart_officialAddress_street'
+    ),
+    this.generatorColumnConf(
+      'counterpart_officialAddress_house'
+    ),
+    this.generatorColumnConf(
+      'counterpart_officialAddress_office'
+    ),
+    this.generatorColumnConf(
+      'counterpart_postAddress_country'
+    ),
+    this.generatorColumnConf(
+      'counterpart_postAddress_region'
+    ),
+    this.generatorColumnConf(
+      'counterpart_postAddress_city'
+    ),
+    this.generatorColumnConf(
+      'counterpart_postAddress_street'
+    ),
+    this.generatorColumnConf(
+      'counterpart_postAddress_house'
+    ),
+    this.generatorColumnConf(
+      'counterpart_postAddress_office'
+    ),
   ];
 
   displayedColumns: string[] = [];
@@ -64,17 +118,15 @@ export class Analytics implements OnInit {
 
   LIST_MAIN_TABLE: number = LIST_MAIN_TABLE;
 
-  data: Signal<UserConfigUi> =
-    this.#store.selectSignal(selectUserConf);
-
   ngOnInit(): void {
     this.#store.dispatch(UserTripsActions.loadUserTrips());
     this.#store.dispatch(UserConfActions.loadTableConfig());
 
     runInInjectionContext(this.#injector, () => {
       effect(() => {
+        // console.log('UserConf from store:', this.data());
         if (!this.data().table) return;
-        this.usersConfig();
+        // this.usersConfig();
         this.displayedColumns = this.usersConfig();
       });
     });
@@ -111,6 +163,7 @@ export class Analytics implements OnInit {
   }
 
   usersConfig(): string[] {
+    // console.log('UserConf from store:', this.data());
     const arrConfigs: [string, boolean][] = Object.entries(
       this.data().table
     );

@@ -23,8 +23,6 @@ export interface SoleProprietor {
 export interface Organization {
   type: 'Organization';
   title: string;
-  officialAddress: AddressConfig;
-  postAddress: AddressConfig;
   taxID: string;
   kpp: string;
   currentAcc: string;
@@ -34,4 +32,29 @@ export interface Organization {
   ogrn: string;
   director: string;
   directorInShort: string;
+  officialAddress: AddressConfig;
+  postAddress: AddressConfig;
+}
+
+export interface Partners {
+  type:
+    | 'Organization'
+    | 'SoleProprietor'
+    | 'PersonalPartner';
+  name?: string;
+  lastName?: string;
+  surname?: string;
+  tel: string;
+  title: string;
+  taxID: string;
+  kpp: string;
+  currentAcc: string;
+  bank: string;
+  correspondentAcc: string;
+  bik: string;
+  ogrn_ogrnip: string;
+  director: string;
+  directorInShort: string;
+  officialAddress: AddressConfig;
+  postAddress: AddressConfig;
 }

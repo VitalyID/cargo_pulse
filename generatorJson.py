@@ -1,11 +1,10 @@
 import json
 import random
 from datetime import datetime, timedelta
-from enum import Enum
-from typing import List, Dict, Union
+from typing import Dict
 import uuid
 
-# Данные для генерации
+# Данные для генерации (остаются без изменений)
 DRIVERS = [
     "Иванов А.С.", "Петров В.И.", "Сидоров Д.К.", "Козлов М.П.", 
     "Николаев С.В.", "Федоров А.А.", "Васильев П.М.", "Смирнов И.Н."
@@ -24,89 +23,148 @@ BANKS = [
 NAMES = ["Алексей", "Дмитрий", "Сергей", "Андрей", "Михаил", "Владимир"]
 LAST_NAMES = ["Иванов", "Петров", "Сидоров", "Кузнецов", "Попов", "Васильев"]
 SURNAMES = ["Александрович", "Дмитриевич", "Сергеевич", "Андреевич", "Михайлович"]
-EMAIL_DOMAINS = ["gmail.com", "yandex.ru", "mail.ru", "outlook.com"]
 
 REGIONS = ["Московская область", "Ленинградская область", "Новосибирская область", "Свердловская область", "Республика Татарстан"]
 CITIES = ["Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань"]
 STREETS = ["Ленина", "Пушкина", "Гагарина", "Советская", "Мира", "Центральная", "Садовоя", "Лесная"]
 
-def generate_address() -> Dict:
-    """Генерирует адрес согласно AddressConfig"""
+def generate_address(prefix: str) -> Dict:
+    """Генерирует адрес с префиксом для полей"""
     address = {
-        "region": random.choice(REGIONS),
-        "city": random.choice(CITIES),
-        "street": random.choice(STREETS),
-        "house": random.randint(1, 100)
+        f"{prefix}_region": random.choice(REGIONS),
+        f"{prefix}_city": random.choice(CITIES),
+        f"{prefix}_street": random.choice(STREETS),
+        f"{prefix}_house": random.randint(1, 100)
     }
     
     # Добавляем опциональные поля с вероятностью 50%
     if random.random() > 0.5:
-        address["country"] = "Россия"
+        address[f"{prefix}_country"] = "Россия"
     if random.random() > 0.5:
-        address["office"] = random.randint(1, 50)
+        address[f"{prefix}_office"] = random.randint(1, 50)
         
     return address
 
-def generate_personal_config() -> Dict:
-    """Генерирует PersonalConfig"""
+def generate_empty_address(prefix: str) -> Dict:
+    """Генерирует пустой адрес с 'Отсутствует'"""
+    address = {
+        f"{prefix}_region": "Отсутствует",
+        f"{prefix}_city": "Отсутствует", 
+        f"{prefix}_street": "Отсутствует",
+        f"{prefix}_house": 0
+    }
+    
+    # Для пустого адреса тоже добавляем опциональные поля с вероятностью 50%
+    if random.random() > 0.5:
+        address[f"{prefix}_country"] = "Отсутствует"
+    if random.random() > 0.5:
+        address[f"{prefix}_office"] = 0
+        
+    return address
+
+def generate_personal_partner_fields() -> Dict:
+    """Генерирует поля для частного заказчика"""
     name = random.choice(NAMES)
     last_name = random.choice(LAST_NAMES)
+    surname = random.choice(SURNAMES)
     
-    return {
-        "name": name,
-        "lastName": last_name,
-        "surname": random.choice(SURNAMES),
-        "address": generate_address(),
-        "cost": round(random.uniform(1000, 5000), 2),
-        "phone": int(f"7{random.randint(9000000000, 9999999999)}"),
-        "email": f"{name.lower()}.{last_name.lower()}@{random.choice(EMAIL_DOMAINS)}",
-        "messenger": random.choice(["Telegram", "WhatsApp", "Viber", "Signal"])
+    base_fields = {
+        "counterpart_type": "PersonalPartner",
+        "counterpart_name": name,
+        "counterpart_lastName": last_name,
+        "counterpart_surname": surname,
+        "counterpart_tel": f"+7{random.randint(900, 999)}{random.randint(1000000, 9999999)}",
+        "counterpart_title": "Отсутствует",
+        "counterpart_taxID": "Отсутствует",
+        "counterpart_kpp": "Отсутствует",
+        "counterpart_currentAcc": "Отсутствует",
+        "counterpart_bank": "Отсутствует",
+        "counterpart_correspondentAcc": "Отсутствует",
+        "counterpart_bik": "Отсутствует",
+        "counterpart_ogrn_ogrnip": "Отсутствует",
+        "counterpart_director": "Отсутствует",
+        "counterpart_directorInShort": "Отсутствует"
     }
+    
+    # Добавляем адреса
+    base_fields.update(generate_empty_address("counterpart_officialAddress"))
+    base_fields.update(generate_empty_address("counterpart_postAddress"))
+    
+    return base_fields
 
-def generate_personal_partner() -> Dict:
-    """Генерирует данные частного заказчика"""
-    return {
-        "type": "PersonalPartner",
-        "name": random.choice(NAMES),
-        "lastName": random.choice(LAST_NAMES),
-        "surname": random.choice(SURNAMES),
-        "tel": f"+7{random.randint(900, 999)}{random.randint(1000000, 9999999)}"
+def generate_sole_proprietor_fields() -> Dict:
+    """Генерирует поля для индивидуального предпринимателя"""
+    name = random.choice(NAMES)
+    last_name = random.choice(LAST_NAMES)
+    surname = random.choice(SURNAMES)
+    
+    base_fields = {
+        "counterpart_type": "SoleProprietor",
+        "counterpart_name": name,
+        "counterpart_lastName": last_name,
+        "counterpart_surname": surname,
+        "counterpart_tel": f"+7{random.randint(900, 999)}{random.randint(1000000, 9999999)}",
+        "counterpart_title": f"ИП {last_name} {name[0]}.{surname[0]}.",
+        "counterpart_taxID": f"{random.randint(1000000000, 9999999999)}",
+        "counterpart_kpp": f"{random.randint(100000000, 999999999)}",
+        "counterpart_currentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
+        "counterpart_bank": random.choice(BANKS),
+        "counterpart_correspondentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
+        "counterpart_bik": f"{random.randint(100000000, 999999999)}",
+        "counterpart_ogrn_ogrnip": f"{random.randint(1000000000000, 9999999999999)}",
+        "counterpart_director": f"{last_name} {name} {surname}",
+        "counterpart_directorInShort": f"{last_name[0]}.{name[0]}."
     }
+    
+    # Добавляем адреса
+    base_fields.update(generate_address("counterpart_officialAddress"))
+    base_fields.update(generate_address("counterpart_postAddress"))
+    
+    return base_fields
 
-def generate_sole_proprietor() -> Dict:
-    """Генерирует данные индивидуального предпринимателя"""
-    personal_config = generate_personal_config()
-    return {
-        "type": "SoleProprietor",
-        "personalInfo": personal_config,
-        "taxId": f"{random.randint(1000000000, 9999999999)}",
-        "ogrnip": f"{random.randint(1000000000000, 9999999999999)}",
-        "okpo": f"{random.randint(10000000, 99999999)}",
-        "currentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
-        "bank": random.choice(BANKS),
-        "correspondentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}"
+def generate_organization_fields() -> Dict:
+    """Генерирует поля для организации"""
+    name = random.choice(NAMES)
+    last_name = random.choice(LAST_NAMES)
+    surname = random.choice(SURNAMES)
+    
+    base_fields = {
+        "counterpart_type": "Organization",
+        "counterpart_name": name,
+        "counterpart_lastName": last_name,
+        "counterpart_surname": surname,
+        "counterpart_tel": f"+7{random.randint(900, 999)}{random.randint(1000000, 9999999)}",
+        "counterpart_title": f"ООО '{random.choice(['Техно', 'Строй', 'Транс', 'Логист', 'Сервис'])}{random.randint(1, 100)}'",
+        "counterpart_taxID": f"{random.randint(1000000000, 9999999999)}",
+        "counterpart_kpp": f"{random.randint(100000000, 999999999)}",
+        "counterpart_currentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
+        "counterpart_bank": random.choice(BANKS),
+        "counterpart_correspondentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
+        "counterpart_bik": f"{random.randint(100000000, 999999999)}",
+        "counterpart_ogrn_ogrnip": f"{random.randint(1000000000000, 9999999999999)}",
+        "counterpart_director": f"{last_name} {name} {surname}",
+        "counterpart_directorInShort": f"{last_name[0]}.{name[0]}."
     }
+    
+    # Добавляем адреса
+    base_fields.update(generate_address("counterpart_officialAddress"))
+    base_fields.update(generate_address("counterpart_postAddress"))
+    
+    return base_fields
 
-def generate_organization() -> Dict:
-    """Генерирует данные организации"""
-    return {
-        "type": "Organization",
-        "title": f"ООО '{random.choice(['Техно', 'Строй', 'Транс', 'Логист', 'Сервис'])}{random.randint(1, 100)}'",
-        "officialAddress": generate_address(),
-        "postAddress": generate_address(),
-        "taxID": f"{random.randint(1000000000, 9999999999)}",
-        "kpp": f"{random.randint(100000000, 999999999)}",
-        "currentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
-        "bank": random.choice(BANKS),
-        "correspondentAcc": f"{random.randint(10000000000000000000, 99999999999999999999)}",
-        "bik": f"{random.randint(100000000, 999999999)}",
-        "ogrn": f"{random.randint(1000000000000, 9999999999999)}",
-        "director": f"{random.choice(LAST_NAMES)} {random.choice(NAMES)} {random.choice(SURNAMES)}",
-        "directorInShort": f"{random.choice(LAST_NAMES)[0]}.{random.choice(NAMES)[0]}."
-    }
+def generate_counterparty_fields() -> Dict:
+    """Генерирует поля контрагента согласно типу"""
+    counterparty_type = random.choice(["PersonalPartner", "SoleProprietor", "Organization"])
+    
+    if counterparty_type == "PersonalPartner":
+        return generate_personal_partner_fields()
+    elif counterparty_type == "SoleProprietor":
+        return generate_sole_proprietor_fields()
+    else:
+        return generate_organization_fields()
 
 def generate_user_trip(date: str) -> Dict:
-    """Генерирует одну поездку"""
+    """Генерирует одну поездку с плоской структурой"""
     mileage = random.randint(50, 500)
     fuel_consumption = round(mileage * random.uniform(0.08, 0.15), 1)
     fuel_cost = round(fuel_consumption * random.uniform(45, 55), 2)
@@ -114,7 +172,16 @@ def generate_user_trip(date: str) -> Dict:
     other_costs = random.randint(100, 500)
     office_cost = random.randint(200, 800)
     
-    prime_cost = fuel_cost + other_costs + office_cost
+    # Генерируем поля контрагента
+    counterparty_fields = generate_counterparty_fields()
+    
+    # Для PersonalPartner taxCost = 0, для других - случайное значение
+    if counterparty_fields["counterpart_type"] == "PersonalPartner":
+        tax_cost = 0
+    else:
+        tax_cost = round(random.uniform(50, 300), 2)
+    
+    prime_cost = fuel_cost + other_costs + office_cost + tax_cost
     margin = revenue - prime_cost
     marginality = round((margin / revenue) * 100, 2) if revenue > 0 else 0
     
@@ -128,6 +195,7 @@ def generate_user_trip(date: str) -> Dict:
         "actualWorkTime": random.randint(2, 12),
         "fuelConsumption": fuel_consumption,
         "fuelCost": fuel_cost,
+        "taxCost": tax_cost,
         "primeCost": round(prime_cost, 2),
         "officeCost": office_cost,
         "otherCost": other_costs,
@@ -136,19 +204,8 @@ def generate_user_trip(date: str) -> Dict:
         "marginality": marginality
     }
     
-    # Добавляем taxCost только с вероятностью 70%
-    if random.random() > 0.3:
-        trip["taxCost"] = round(random.uniform(50, 300), 2)
-    
-    # Случайно выбираем тип контрагента
-    counterparty_type = random.choice(["PersonalPartner", "SoleProprietor", "Organization"])
-    
-    if counterparty_type == "PersonalPartner":
-        trip["counterparty"] = generate_personal_partner()
-    elif counterparty_type == "SoleProprietor":
-        trip["counterparty"] = generate_sole_proprietor()
-    else:
-        trip["counterparty"] = generate_organization()
+    # Добавляем все поля контрагента в основной объект
+    trip.update(counterparty_fields)
     
     return trip
 
@@ -207,7 +264,7 @@ def main():
         print(f"Данные сохранены в файл: {output_filename}")
         
         # Статистика по типам контрагентов
-        counterparty_types = [trip['counterparty']['type'] for trip in user_trips]
+        counterparty_types = [trip['counterpart_type'] for trip in user_trips]
         personal_count = counterparty_types.count("PersonalPartner")
         sole_count = counterparty_types.count("SoleProprietor")
         org_count = counterparty_types.count("Organization")
@@ -218,20 +275,27 @@ def main():
         print(f"  Organization: {org_count} ({org_count/total_trips*100:.1f}%)")
         
         # Статистика по taxCost
-        trips_with_tax = sum(1 for trip in user_trips if 'taxCost' in trip)
-        print(f"Поездок с taxCost: {trips_with_tax} ({trips_with_tax/total_trips*100:.1f}%)")
+        trips_with_zero_tax = sum(1 for trip in user_trips if trip['taxCost'] == 0)
+        print(f"Поездок с taxCost = 0: {trips_with_zero_tax} ({trips_with_zero_tax/total_trips*100:.1f}%)")
         
         # Показываем пример данных
         if user_trips:
             print(f"\nПример данных (первая поездка):")
             sample_trip = user_trips[0]
+            print(f"ID: {sample_trip['id']}")
             print(f"Дата: {sample_trip['date']}")
             print(f"Водитель: {sample_trip['driver']}")
-            print(f"Пробег: {sample_trip['mileage']} км")
-            print(f"Контрагент: {sample_trip['counterparty']['type']}")
+            print(f"Тип контрагента: {sample_trip['counterpart_type']}")
+            print(f"TaxCost: {sample_trip['taxCost']}")
             
-            if 'taxCost' in sample_trip:
-                print(f"Налог: {sample_trip['taxCost']} руб")
+            if sample_trip['counterpart_type'] == 'PersonalPartner':
+                print(f"Имя: {sample_trip['counterpart_name']}")
+                print(f"Телефон: {sample_trip['counterpart_tel']}")
+            else:
+                print(f"Название: {sample_trip['counterpart_title']}")
+                print(f"Директор: {sample_trip['counterpart_director']}")
+                print(f"Официальный адрес: {sample_trip['counterpart_officialAddress_region']}, {sample_trip['counterpart_officialAddress_city']}")
+                print(f"Почтовый адрес: {sample_trip['counterpart_postAddress_region']}, {sample_trip['counterpart_postAddress_city']}")
             
     except ValueError as e:
         print(f"Ошибка в формате даты: {e}")
