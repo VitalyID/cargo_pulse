@@ -15,9 +15,11 @@
   <div class="analytics__table">
     <app-generic-table-component
       [userTrips]="userTripData()"
-      [columns]="columns"
+      [columns]="columns()"
       [displayedColumns]="displayedColumns"
       [listPagination]="LIST_MAIN_TABLE"
     ></app-generic-table-component>
   </div>
+
+  {{columns()}}
 </div>

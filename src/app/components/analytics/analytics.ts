@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   inject,
   Injector,
@@ -24,6 +25,7 @@ import { TableSettingDialogComponent } from 'src/app/shared/components/table-set
 
 import { DialogRef } from '@angular/cdk/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog-component/dialog-component';
+import { TablePipes } from 'src/types/enums/tableSellPipe';
 
 @Component({
   selector: 'app-analytics',
@@ -42,75 +44,11 @@ export class Analytics implements OnInit {
   data: Signal<UserConfigUi> =
     this.#store.selectSignal(selectUserConf);
 
-  columns: TableColumnConfig[] = [
-    this.generatorColumnConf('date', 'dd.MM.yyyy'),
-    this.generatorColumnConf('mileage', 'км'),
-    this.generatorColumnConf('actualWorkTime', 'ч'),
-    this.generatorColumnConf('fuelConsumption', 'л'),
-    this.generatorColumnConf('fuelCost', '₽'),
-    this.generatorColumnConf('primeCost', '₽'),
-    this.generatorColumnConf('taxCost', '₽'),
-    this.generatorColumnConf('officeCost', '₽'),
-    this.generatorColumnConf('otherCost', '₽'),
-    this.generatorColumnConf('revenue', '₽'),
-    this.generatorColumnConf('margin', '₽'),
-    this.generatorColumnConf('marginality', '%'),
-    this.generatorColumnConf('driver'),
-    this.generatorColumnConf('licensePlate'),
-    this.generatorColumnConf('counterpart_type'),
-    this.generatorColumnConf('counterpart_name'),
-    this.generatorColumnConf('counterpart_lastName'),
-    this.generatorColumnConf('counterpart_surname'),
-    this.generatorColumnConf('counterpart_tel'),
-    this.generatorColumnConf('counterpart_title'),
-    this.generatorColumnConf('counterpart_taxID'),
-    this.generatorColumnConf('counterpart_kpp'),
-    this.generatorColumnConf('counterpart_currentAcc'),
-    this.generatorColumnConf('counterpart_bank'),
-    this.generatorColumnConf(
-      'counterpart_correspondentAcc'
-    ),
-    this.generatorColumnConf('counterpart_bik'),
-    this.generatorColumnConf('counterpart_ogrn_ogrnip'),
-    this.generatorColumnConf('counterpart_director'),
-    this.generatorColumnConf('counterpart_directorInShort'),
-    this.generatorColumnConf(
-      'counterpart_officialAddress_country'
-    ),
-    this.generatorColumnConf(
-      'counterpart_officialAddress_region'
-    ),
-    this.generatorColumnConf(
-      'counterpart_officialAddress_city'
-    ),
-    this.generatorColumnConf(
-      'counterpart_officialAddress_street'
-    ),
-    this.generatorColumnConf(
-      'counterpart_officialAddress_house'
-    ),
-    this.generatorColumnConf(
-      'counterpart_officialAddress_office'
-    ),
-    this.generatorColumnConf(
-      'counterpart_postAddress_country'
-    ),
-    this.generatorColumnConf(
-      'counterpart_postAddress_region'
-    ),
-    this.generatorColumnConf(
-      'counterpart_postAddress_city'
-    ),
-    this.generatorColumnConf(
-      'counterpart_postAddress_street'
-    ),
-    this.generatorColumnConf(
-      'counterpart_postAddress_house'
-    ),
-    this.generatorColumnConf(
-      'counterpart_postAddress_office'
-    ),
-  ];
+  columns = computed(() => {
+    return this.usersConfig().map(name =>
+      this.generatorColumnConf(name)
+    );
+  });
 
   displayedColumns: string[] = [];
 
@@ -130,10 +68,10 @@ export class Analytics implements OnInit {
     });
   }
 
-  generatorColumnConf(
-    key: string,
-    pipeArg?: string
-  ): TableColumnConfig {
+  generatorColumnConf(key: string): TableColumnConfig {
+    const pipeArg =
+      TablePipes[key as keyof typeof TablePipes];
+
     return {
       key,
       title: KeyTable[key as keyof typeof KeyTable],
@@ -161,7 +99,7 @@ export class Analytics implements OnInit {
   }
 
   usersConfig(): string[] {
-    // console.log('UserConf from store:', this.data());
+    if (!this.data().table) return [];
     const arrConfigs: [string, boolean][] = Object.entries(
       this.data().table
     );
