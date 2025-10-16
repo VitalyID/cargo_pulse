@@ -124,9 +124,7 @@ export class Analytics implements OnInit {
 
     runInInjectionContext(this.#injector, () => {
       effect(() => {
-        // console.log('UserConf from store:', this.data());
         if (!this.data().table) return;
-        // this.usersConfig();
         this.displayedColumns = this.usersConfig();
       });
     });

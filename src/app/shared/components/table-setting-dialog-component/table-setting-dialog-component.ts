@@ -36,14 +36,14 @@ export class TableSettingDialogComponent {
   });
 
   columnSwitchers1 = computed(() =>
-    this.listSwitchers().slice(0, 5)
+    this.listSwitchers().slice(0, 14)
   );
   columnSwitchers2 = computed(() =>
-    this.listSwitchers().slice(5, 10)
+    this.listSwitchers().slice(14, 28)
   );
   columnSwitchers3 = computed(() =>
     this.listSwitchers().slice(
-      10,
+      28,
       this.listSwitchers().length
     )
   );
