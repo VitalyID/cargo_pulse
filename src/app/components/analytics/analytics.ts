@@ -26,6 +26,7 @@ import { TableSettingDialogComponent } from 'src/app/shared/components/table-set
 import { DialogRef } from '@angular/cdk/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog-component/dialog-component';
 import { TablePipes } from 'src/types/enums/tableSellPipe';
+import { TypeClients } from 'src/types/enums/typeCliets';
 
 @Component({
   selector: 'app-analytics',
@@ -44,7 +45,8 @@ export class Analytics implements OnInit {
   data: Signal<UserConfigUi> =
     this.#store.selectSignal(selectUserConf);
 
-  columns = computed(() => {
+  // NOTE: setup column in the table set auto from get back's config
+  columns: Signal<TableColumnConfig[]> = computed(() => {
     return this.usersConfig().map(name =>
       this.generatorColumnConf(name)
     );
@@ -72,13 +74,28 @@ export class Analytics implements OnInit {
     const pipeArg =
       TablePipes[key as keyof typeof TablePipes];
 
+    let cell:
+      | ((element: UserTripConfig) => string)
+      | undefined = undefined;
+    if (key === 'counterpart_type') {
+      cell = (element: UserTripConfig) => {
+        const type = element[key];
+        return type
+          ? TypeClients[type as keyof typeof TypeClients]
+          : '';
+      };
+    }
+
     return {
       key,
       title: KeyTable[key as keyof typeof KeyTable],
-      cell: (element: UserTripConfig) => {
-        const value = element[key as keyof UserTripConfig];
-        return value?.toString() ?? '';
-      },
+      cell:
+        cell ||
+        ((element: UserTripConfig) => {
+          const value =
+            element[key as keyof UserTripConfig];
+          return value?.toString() ?? '';
+        }),
       pipe: key === 'date' ? 'date' : 'withUnit',
       pipeArg,
     };
