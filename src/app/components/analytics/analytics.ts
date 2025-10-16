@@ -74,6 +74,7 @@ export class Analytics implements OnInit {
     const pipeArg =
       TablePipes[key as keyof typeof TablePipes];
 
+    // NOTE: translate partners in column counterpart_type
     let cell:
       | ((element: UserTripConfig) => string)
       | undefined = undefined;
