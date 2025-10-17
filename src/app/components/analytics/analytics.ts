@@ -3,7 +3,6 @@ import {
   Component,
   computed,
   inject,
-  Injector,
   OnInit,
   Signal,
 } from '@angular/core';
@@ -35,7 +34,6 @@ import { TypeClients } from 'src/types/enums/typeCliets';
 })
 export class Analytics implements OnInit {
   readonly #store = inject(Store);
-  readonly #injector = inject(Injector);
   readonly dialog = inject(MatDialog);
 
   userTripData: Signal<UserTripConfig[]> =
