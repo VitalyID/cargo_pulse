@@ -7,6 +7,7 @@
         <app-switcher-component
           [name]="switcher.name"
           [initialActive]="switcher.isActive"
+          (stateCheckbox)="userTabCol($event)"
         ></app-switcher-component>
         <span>{{convertName (switcher.name)}}</span>
       </div>

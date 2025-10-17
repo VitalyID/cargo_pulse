@@ -3,13 +3,23 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
+  signal,
+  Signal,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { LIST_SWITCHERS } from 'src/app/const';
-import { UserConfigUi } from 'src/types/interfaces/userConfigUi';
+import { selectUserConf } from 'src/app/states/userConfig/user-config.selectors';
+import { KeyTable } from 'src/types/enums/keyMainTable';
+import {
+  TableConf,
+  UserConfigUi,
+} from 'src/types/interfaces/userConfigUi';
+import * as UserConfigTableActions from '../../../states/userConfig/user-config.action';
 import { CardComponent } from '../card/card-component';
 import { SwitcherComponent } from '../switcher-component/switcher-component';
-import { KeyTable } from 'src/types/enums/keyMainTable';
+import { SwitcherConfig } from '../switcher-component/switcherConfig';
 
 @Component({
   selector: 'app-table-setting-dialog-component',
@@ -21,6 +31,15 @@ import { KeyTable } from 'src/types/enums/keyMainTable';
 })
 export class TableSettingDialogComponent {
   userConf = input<UserConfigUi>();
+
+  readonly #store = inject(Store);
+
+  stateUserConf: Signal<UserConfigUi> =
+    this.#store.selectSignal(selectUserConf);
+
+  localUserConfTable = signal<TableConf>(
+    this.stateUserConf().table
+  );
 
   listSwitchers = computed(() => {
     const inputsValue = this.userConf()?.table;
@@ -51,5 +70,27 @@ export class TableSettingDialogComponent {
   convertName(name: string): string {
     const key = name as keyof typeof KeyTable;
     return KeyTable[key];
+  }
+
+  userTabCol(date: SwitcherConfig) {
+    console.log(date);
+
+    this.localUserConfTable.update(oldValue => {
+      const tmp = { ...oldValue };
+      return {
+        ...tmp,
+        [date.name]: date.isActive,
+      };
+    });
+
+    const newConfig = this.localUserConfTable();
+    this.#store.dispatch(
+      UserConfigTableActions.updateTableConfigUser({
+        newConfig,
+      })
+    );
+
+    console.log(this.localUserConfTable());
+    console.log(this.stateUserConf());
   }
 }

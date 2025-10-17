@@ -66,6 +66,7 @@ export class Analytics implements OnInit {
       effect(() => {
         if (!this.data().table) return;
         this.displayedColumns = this.usersConfig();
+        console.log(this.data());
       });
     });
   }

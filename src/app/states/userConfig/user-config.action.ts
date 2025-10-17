@@ -17,3 +17,8 @@ export const loadTableConfigFailure = createAction(
   '[Table Config] Load Table config FAILURE',
   props<{ error: any }>()
 );
+
+export const updateTableConfigUser = createAction(
+  '[Table Config] Update Table config',
+  props<{ newConfig: TableConf }>()
+);

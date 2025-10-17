@@ -53,7 +53,6 @@ export class GenericTableComponent
   displayedColumns = input.required<string[]>();
   listPagination = input.required<number>();
 
-  // isPaginator = signal<boolean>(false);
   isPaginator = computed(
     () => this.userTrips().length > this.listPagination()
   );

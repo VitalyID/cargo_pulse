@@ -83,5 +83,15 @@ export const UserConfUiReducer = createReducer(
       isLoading: false,
       error: error,
     })
+  ),
+
+  on(
+    UserConfigTableActions.updateTableConfigUser,
+    (state, { newConfig }) => ({
+      ...state,
+      conf: { ...state.conf, table: newConfig },
+      isLoading: false,
+      error: null,
+    })
   )
 );

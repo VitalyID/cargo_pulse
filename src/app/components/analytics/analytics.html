@@ -13,6 +13,7 @@
   </div>
 
   <div class="analytics__table">
+    {{columns() | json}}
     <app-generic-table-component
       [userTrips]="userTripData()"
       [columns]="columns()"
