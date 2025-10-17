@@ -2,11 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   inject,
   Injector,
   OnInit,
-  runInInjectionContext,
   Signal,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -45,14 +43,29 @@ export class Analytics implements OnInit {
   data: Signal<UserConfigUi> =
     this.#store.selectSignal(selectUserConf);
 
+  displayedColumns = computed(() => {
+    if (!this.data().table) return [];
+    console.log(1, this.data().table);
+    console.log(2, this.data());
+
+    const arrConfigs: [string, boolean][] = Object.entries(
+      this.data().table
+    );
+
+    // return only keys, when value === true
+    return arrConfigs
+      .filter(conf => conf[1])
+      .map(conf => {
+        return conf[0];
+      });
+  });
+
   // NOTE: setup column in the table set auto from get back's config
   columns: Signal<TableColumnConfig[]> = computed(() => {
-    return this.usersConfig().map(name =>
+    return this.displayedColumns().map(name =>
       this.generatorColumnConf(name)
     );
   });
-
-  displayedColumns: string[] = [];
 
   dialogRef?: DialogRef;
 
@@ -61,14 +74,6 @@ export class Analytics implements OnInit {
   ngOnInit(): void {
     this.#store.dispatch(UserTripsActions.loadUserTrips());
     this.#store.dispatch(UserConfActions.loadTableConfig());
-
-    runInInjectionContext(this.#injector, () => {
-      effect(() => {
-        if (!this.data().table) return;
-        this.displayedColumns = this.usersConfig();
-        console.log(this.data());
-      });
-    });
   }
 
   generatorColumnConf(key: string): TableColumnConfig {
@@ -115,19 +120,5 @@ export class Analytics implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-  }
-
-  usersConfig(): string[] {
-    if (!this.data().table) return [];
-    const arrConfigs: [string, boolean][] = Object.entries(
-      this.data().table
-    );
-
-    // return only keys, when value === true
-    return arrConfigs
-      .filter(conf => conf[1])
-      .map(conf => {
-        return conf[0];
-      });
   }
 }

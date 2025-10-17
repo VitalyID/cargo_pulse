@@ -73,8 +73,6 @@ export class TableSettingDialogComponent {
   }
 
   userTabCol(date: SwitcherConfig) {
-    console.log(date);
-
     this.localUserConfTable.update(oldValue => {
       const tmp = { ...oldValue };
       return {
@@ -89,8 +87,5 @@ export class TableSettingDialogComponent {
         newConfig,
       })
     );
-
-    console.log(this.localUserConfTable());
-    console.log(this.stateUserConf());
   }
 }

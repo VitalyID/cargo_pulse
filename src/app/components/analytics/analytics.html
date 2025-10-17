@@ -13,11 +13,10 @@
   </div>
 
   <div class="analytics__table">
-    {{columns() | json}}
     <app-generic-table-component
       [userTrips]="userTripData()"
       [columns]="columns()"
-      [displayedColumns]="displayedColumns"
+      [displayedColumns]="displayedColumns()"
       [listPagination]="LIST_MAIN_TABLE"
     ></app-generic-table-component>
   </div>

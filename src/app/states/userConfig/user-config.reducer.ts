@@ -70,7 +70,7 @@ export const UserConfUiReducer = createReducer(
     UserConfigTableActions.loadTableConfigSuccess,
     (state, { conf }) => ({
       ...state,
-      table: conf.table,
+      conf: conf,
       isLoading: false,
       error: null,
     })

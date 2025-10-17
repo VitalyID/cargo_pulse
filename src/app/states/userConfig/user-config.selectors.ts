@@ -3,11 +3,12 @@ import {
   createSelector,
 } from '@ngrx/store';
 import { UserConfigUi } from 'src/types/interfaces/userConfigUi';
+import { UserConfigState } from './user-config.reducer';
 
 const selectUserConfState =
-  createFeatureSelector<UserConfigUi>('userConfKey');
+  createFeatureSelector<UserConfigState>('userConfKey');
 
 export const selectUserConf = createSelector(
   selectUserConfState,
-  (conf: UserConfigUi) => conf
+  (state: UserConfigState): UserConfigUi => state.conf
 );
